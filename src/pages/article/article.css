@@ -1,0 +1,60 @@
+.article-title {
+    font-size: 48px; /* Increase the font size for better visibility */
+    font-weight: bold;
+    text-align: center;
+    color: #d112a1; /* Change the color as needed */
+    font-family: 'Roboto', sans-serif; /* Use the Roboto font or any other attractive font */
+}
+.article-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust spacing between items */
+    padding: 20px;
+}
+
+.article-item {
+    width: calc(33.33% - 20px); /* Adjust width to fit three items in a row */
+    min-width: 250px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+    border: 2px solid #e9e9e9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-item:hover {
+    box-shadow: 0 0 20px rgba(129, 80, 80, 0.2);
+}
+
+.article-image {
+    width: 100%;
+    height: 200px; /* Adjust height of the image */
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+}
+
+.article-content {
+    padding: 10px;
+    background-color: rgba(235, 222, 222, 0.9);
+    border-radius: 0 0 15px 15px; /* Match bottom border radius */
+}
+
+.article-content h2 {
+    margin-top: 0; /* Remove default margin */
+    padding: 7px;
+}
+
+.read-more-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.read-more-btn:hover {
+    background-color: #0056b3;
+}
