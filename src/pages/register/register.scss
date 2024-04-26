@@ -17,7 +17,7 @@
     .left {
       flex: 1;
       background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
-        url("https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600")
+        url("https://i.ibb.co/h2Yfp6f/dud.jpg?auto=compress&cs=tinysrgb&w=1600")
           center;
       background-size: cover;
       padding: 50px;
@@ -30,14 +30,15 @@
         font-size: 100px;
         line-height: 100px;
       }
-      
+
       p {
+        color: white;
       }
 
       span {
         font-size: 14px;
       }
-      
+
       button {
         width: 50%;
         padding: 10px;
@@ -58,20 +59,32 @@
       justify-content: center;
 
       h1 {
-      color: #555;
+        color: #555;
       }
-      
+
       form {
         display: flex;
         flex-direction: column;
         gap: 30px;
-        
+
         input {
-        border: none;
-        border-bottom: 1px solid lightgray;
-        padding: 20px 10px;
+          border: none;
+          border-bottom: 1px solid lightgray;
+          padding: 20px 10px;
+          font-size: 16px;
+          transition: border-color 0.3s ease;
+          &:focus {
+            border-color: #938eef;
+            outline: none;
+          }
         }
-        
+
+        .error {
+          color: red;
+          font-size: 14px;
+          margin-top: -15px;
+        }
+
         button {
           width: 50%;
           padding: 10px;
