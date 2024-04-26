@@ -6,37 +6,41 @@
   justify-content: center;
 
   .card {
-    width: 50%;
+    width: 90%;
+    max-width: 1200px;
     display: flex;
     flex-direction: row-reverse;
     background-color: white;
-    border-radius: 10px;
-    min-height: 600px;
+    border-radius: 20px;
     overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 
     .left {
       flex: 1;
-      background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
+      background: linear-gradient(rgba(39, 11, 96, 0.7), rgba(39, 11, 96, 0.7)),
         url("https://i.ibb.co/h2Yfp6f/dud.jpg?auto=compress&cs=tinysrgb&w=1600")
           center;
       background-size: cover;
       padding: 50px;
       display: flex;
       flex-direction: column;
-      gap: 30px;
+      justify-content: center;
       color: white;
+      text-align: center;
 
       h1 {
-        font-size: 100px;
-        line-height: 100px;
+        font-size: 4rem;
+        margin-bottom: 1rem;
       }
 
       p {
-        color: white;
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
       }
 
       span {
-        font-size: 14px;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
       }
 
       button {
@@ -47,6 +51,10 @@
         color: rebeccapurple;
         font-weight: bold;
         cursor: pointer;
+        transition: background-color 0.3s ease;
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.9);
+        }
       }
     }
 
@@ -55,11 +63,12 @@
       padding: 50px;
       display: flex;
       flex-direction: column;
-      gap: 50px;
       justify-content: center;
 
       h1 {
+        font-size: 3rem;
         color: #555;
+        margin-bottom: 2rem;
       }
 
       form {
@@ -67,11 +76,12 @@
         flex-direction: column;
         gap: 30px;
 
-        input {
+        input,
+        select {
           border: none;
-          border-bottom: 1px solid lightgray;
-          padding: 20px 10px;
-          font-size: 16px;
+          border-bottom: 2px solid #ddd;
+          padding: 15px 10px;
+          font-size: 1.2rem;
           transition: border-color 0.3s ease;
           &:focus {
             border-color: #938eef;
@@ -81,18 +91,23 @@
 
         .error {
           color: red;
-          font-size: 14px;
+          font-size: 1rem;
           margin-top: -15px;
         }
 
         button {
+          align-self: flex-end;
           width: 50%;
-          padding: 10px;
+          padding: 15px;
           border: none;
           background-color: #938eef;
           color: white;
           font-weight: bold;
           cursor: pointer;
+          transition: background-color 0.3s ease;
+          &:hover {
+            background-color: #7f78de;
+          }
         }
       }
     }
