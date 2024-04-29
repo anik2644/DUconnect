@@ -10,9 +10,15 @@ import { useState } from "react";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(12); // Initial likes count
 
-  //TEMPORARY
-  const liked = false;
+  const handleLikeClick = () => {
+    // Toggle the liked state
+    setLiked((prevLiked) => !prevLiked);
+    // Update likes count based on current liked state
+    setLikesCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
+  };
 
   return (
     <div className="post">
@@ -37,9 +43,9 @@ const Post = ({ post }) => {
           <img src={post.img} alt="" />
         </div>
         <div className="info">
-          <div className="item">
+          <div className="item" onClick={handleLikeClick}>
             {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-            12 Likes
+            {likesCount} Likes
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
             <TextsmsOutlinedIcon />

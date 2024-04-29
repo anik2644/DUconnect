@@ -24,6 +24,7 @@ import Settings from "./pages/settings/Settings";
 import Terms from "./pages/terms/Terms";
 import Notification from "./pages/notification/Notification";
 import Event from "./pages/event/event";
+import Articledetail from "./pages/artticledetail/articledetail";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -104,6 +105,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/readmore",
+      element: <Articledetail />,
     },
   ]);
 

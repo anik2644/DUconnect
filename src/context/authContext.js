@@ -13,8 +13,7 @@ export const AuthContextProvider = ({ children }) => {
       id: 1,
       name: "Anik",
       profilePic:
-        "https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600",
-    });
+        "https://i.ibb.co/h2Yfp6f/dud.jpg?auto=compress&cs=tinysrgb&w=1600"    });
   };
 
   useEffect(() => {

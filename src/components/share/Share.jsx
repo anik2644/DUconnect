@@ -1,11 +1,8 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import "./share.scss";
-import Image from "../../assets/img.png"; // Import the Image
-import Map from "../../assets/map.png"; // Import the Map
-import Friend from "../../assets/friend.png"; // Import the Friend image
 
-const Share = () => {
+const Share = ({ onShare }) => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -22,12 +19,20 @@ const Share = () => {
   };
 
   const handleShare = () => {
-    // Your logic to share the post goes here
-    const postData = {
-      text,
-      image: selectedImage, // Send the selected image as part of the post data
+    // Create a new shared post object
+    const newPost = {
+      id: Math.random(),
+      name: currentUser.name,
+      userId: currentUser.id,
+      profilePic: currentUser.profilePic,
+      desc: text,
+      img: selectedImage,
+      likes: 0,
+      comments: [],
     };
-    console.log("Post data:", postData);
+
+    // Invoke the onShare callback to share the post
+    onShare(newPost);
 
     // Clear input fields after sharing
     setText("");
@@ -47,11 +52,21 @@ const Share = () => {
             onChange={(e) => setText(e.target.value)}
           />
         </div>
+        {selectedImage && (
+          <div className="selected-image-container">
+            <img src={selectedImage} alt="Selected" className="selected-image" />
+          </div>
+        )}
+        <input
+          type="file"
+          id="file"
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
         <hr />
         <div className="bottom">
           <div className="left">
             <label htmlFor="file" className="file-label">
-              <img src={Image} alt="Add Image" className="icon" />
               <span>Add Photo/Video</span>
               <input
                 type="file"
@@ -60,14 +75,6 @@ const Share = () => {
                 onChange={handleImageChange}
               />
             </label>
-            <div className="option">
-              <img src={Map} alt="Add Location" className="icon" />
-              <span>Add Location</span>
-            </div>
-            <div className="option">
-              <img src={Friend} alt="Tag Friends" className="icon" />
-              <span>Tag Friends</span>
-            </div>
           </div>
           <div className="right">
             <button className="share-button" onClick={handleShare}>

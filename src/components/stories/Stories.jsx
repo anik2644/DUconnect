@@ -11,22 +11,22 @@ const Stories = () => {
     {
       id: 1,
       name: "Anik",
-      img: "https://images.pexels.com/photos/13916254/pexels-photo-13916254.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      img: "https://i.ibb.co/8YkTy5X/399802121-2096661420678789-8201301384481582908-n.jpg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     },
     {
       id: 2,
-      name: "Anik",
-      img: "https://images.pexels.com/photos/13916254/pexels-photo-13916254.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      name: "Nafisa",
+      img: "https://i.ibb.co/4FKGyqb/pikaso-texttoimage-Generate-an-image-depicting-Robo-Buddies-interactiv-4.jpg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     },
     {
       id: 3,
-      name: "Anik",
-      img: "https://images.pexels.com/photos/13916254/pexels-photo-13916254.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      name: "Meherin",
+      img: "https://i.ibb.co/3BFM7r6/akamai-ddos-1088x725-1.webp?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     },
     {
       id: 4,
-      name: "Anik",
-      img: "https://images.pexels.com/photos/13916254/pexels-photo-13916254.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load",
+      name: "Preety",
+      img: "https://i.ibb.co/bB3rPXQ/betterthanfr.jpg ?auto=compress&cs=tinysrgb&w=1600&lazy=load",
     },
   ];
 

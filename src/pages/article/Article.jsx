@@ -2,12 +2,13 @@ import "../../style.scss"
 import React from 'react';
 import './article.css'; // Import your custom CSS file for styling
 import '../../style.scss';
+import { Link } from 'react-router-dom';
 
 const ArticlePage = () => {
     // Sample data for articles with image URLs
     const articles = [
-        { id: 1, title: 'Article 1', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 2, title: 'Article 2', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 1, title: 'Article 1', imageUrl: 'https://i.ibb.co/N22nbCJ/Du-metro.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 2, title: 'Article 2', imageUrl: 'https://i.ibb.co/CH8K04b/cz.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 3, title: 'Article 3', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 4, title: 'Article 4', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 5, title: 'Article 5', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
@@ -21,8 +22,9 @@ const ArticlePage = () => {
     return (
         <div className="article-page">
             <header className="article-header">
-                <h1 className="article-title">DU Connect Articles</h1>
+                <h1 className="article-title">DU Articles</h1>
             </header>
+
             <main className="article-main">
                 <section className="article-list">
                     {articles.map(article => (
@@ -31,7 +33,9 @@ const ArticlePage = () => {
                             <div className="article-content">
                                 <h2>{article.title}</h2>
                                 <p>{article.content}</p>
-                                <button className="read-more-btn">Read More</button>
+                                <button className="read-more-btn">
+                            <Link to="/readmore" className="read-more-link">Read More</Link>
+                        </button>
                             </div>
                         </div>
                     ))}

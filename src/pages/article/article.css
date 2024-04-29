@@ -2,8 +2,10 @@
     font-size: 48px; /* Increase the font size for better visibility */
     font-weight: bold;
     text-align: center;
-    color: #d112a1; /* Change the color as needed */
-    font-family: 'Roboto', sans-serif; /* Use the Roboto font or any other attractive font */
+    color: #2803f7; /* Change the color as needed */
+    font-family: 'Roboto', sans-serif;
+    text-decoration: underline;
+     padding-bottom: 50px;
 }
 .article-list {
     display: flex;
@@ -36,7 +38,7 @@
 
 .article-content {
     padding: 10px;
-    background-color: rgba(235, 222, 222, 0.9);
+    background-color: rgba(219, 208, 208, 0.9);
     border-radius: 0 0 15px 15px; /* Match bottom border radius */
 }
 
@@ -46,8 +48,8 @@
 }
 
 .read-more-btn {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #047cfc;
+    color: #f7f6f6;
     border: none;
     padding: 10px;
     border-radius: 5px;
