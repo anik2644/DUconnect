@@ -2,6 +2,7 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import pymongo
+import asyncio
 
 app = FastAPI()
 
@@ -66,22 +67,36 @@ app.add_middleware(
 
 def save_post(post: Post):
    
-   myDoc = {
-        "name": post.name,
-        "userid": post.userId,
-    }
-   print(myDoc)
-   res = myCollection.insert_one(myDoc)
-#    documents = myCollection.find()
-#    for document in documents:
-#        print(document)
+   print(":hekadspa")
+   # myDoc = {
+   #      "name": post.name,
+   #      "userid": post.userId,
+   #  }
+   # #print(myDoc)
+   # res = myCollection.insert_one(myDoc)
+
+#    asyncio.sleep(2)
+#  Step 7: Reading the document
+   documents = myCollection.find()
+   for document in documents:
+        print("anik there\n")
+        print(document)
+        print("anik there\n")
+
+   # record = myCollection.find_one()
+   # print("anik there\n")
+   # print(record)
+   # print("anik there\n")
+# #    documents = myCollection.find()
+# #    for document in documents:
+# #        print(document)
 
 
 
 
 @app.post("/posts/")
 async def create_post(post: Post):
-    print("Received Post:", post.dict())  # Just for debugging purposes
+    # print("Received Post:", post.dict())  # Just for debugging purposes
     print("I am the king of the world!")
 
     # # return {"message": "Post saved successfully"} 
