@@ -3,6 +3,9 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import pymongo
 import asyncio
+from typing import List
+from bson import ObjectId  # Import ObjectId from bson module
+
 
 app = FastAPI()
 
@@ -65,9 +68,9 @@ app.add_middleware(
 )
 
 
-def save_post(post: Post):
+def save_post(post: Post)  -> List[dict]:
    
-   print(":hekadspa")
+   print(":habijabi")
    # myDoc = {
    #      "name": post.name,
    #      "userid": post.userId,
@@ -77,16 +80,25 @@ def save_post(post: Post):
 
 #    asyncio.sleep(2)
 #  Step 7: Reading the document
+   documents_list = []
    documents = myCollection.find()
    for document in documents:
-        print("anik there\n")
+      #   print("anik there\n")
         print(document)
-        print("anik there\n")
+        document['_id'] = str(document['_id'])
 
+        documents_list.append(document)
+
+      #   print("anik there\n")
+      #   documents_list.append(document)
+
+   return documents_list
    # record = myCollection.find_one()
    # print("anik there\n")
    # print(record)
+   # documents_list.append(record)
    # print("anik there\n")
+   # return documents_list
 # #    documents = myCollection.find()
 # #    for document in documents:
 # #        print(document)
@@ -108,8 +120,8 @@ async def create_post(post: Post):
     # except Exception as e:
     #     raise HTTPException(status_code=500, detail=str(e))
     
-    save_post(post)
-    return {"message": "User registered successfully"}
+    documents = save_post(post)
+    return {"message": "User registered successfully", "documents": documents}
 
 
 
