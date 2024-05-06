@@ -14,7 +14,7 @@ const ArticleDetailPage = () => {
                     <p>BSc in Computer Science and Engineering, University of Dhaka</p>
                 </div>
             </div>
-            <h1 className="article-title">Article Title</h1>
+            <h1 className="article-title">Curzon Hall</h1>
             <div className="cover-photo">
                 <img src="https://i.ibb.co/h2Yfp6f/dud.jpg" alt="Cover Photo" />
             </div>

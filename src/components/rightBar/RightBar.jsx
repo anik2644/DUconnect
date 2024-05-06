@@ -54,10 +54,10 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Anik</span> changed their cover picture
+                <span>Nafisa</span> changed their cover picture
               </p>
             </div>
-            <span>1 min ago</span>
+            <span>3 min ago</span>
           </div>
           <div className="user">
             <div className="userInfo">
@@ -66,10 +66,10 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Anik</span> changed their cover picture
+                <span>Binod</span> changed their cover picture
               </p>
             </div>
-            <span>1 min ago</span>
+            <span>1 hr ago</span>
           </div>
           <div className="user">
             <div className="userInfo">
@@ -78,7 +78,7 @@ const RightBar = () => {
                 alt=""
               />
               <p>
-                <span>Anik</span> changed their cover picture
+                <span>Bista</span> changed their cover picture
               </p>
             </div>
             <span>1 min ago</span>
@@ -103,7 +103,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Anik</span>
+              <span>Eesor</span>
             </div>
           </div>
           <div className="user">
@@ -113,7 +113,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Anik</span>
+              <span>Nafisa</span>
             </div>
           </div>
           <div className="user">
@@ -123,7 +123,7 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Anik</span>
+              <span>Meherin</span>
             </div>
           </div>
           <div className="user">
@@ -133,39 +133,10 @@ const RightBar = () => {
                 alt=""
               />
               <div className="online" />
-              <span>Anik</span>
+              <span>Preety</span>
             </div>
           </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Anik</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Anik</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Anik</span>
-            </div>
-          </div>
+
 
         </div>
       </div>

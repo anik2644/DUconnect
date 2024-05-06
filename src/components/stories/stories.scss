@@ -5,6 +5,9 @@
   gap: 10px;
   height: 250px;
   margin-bottom: 30px;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
+  position: relative;
 
   @include mobile {
     height: 50px;
@@ -12,19 +15,19 @@
     justify-content: space-between;
   }
 
-  @include tablet{
+  @include tablet {
     height: 150px;
     gap: 20px;
   }
 
   .story {
+    position: relative;
     flex: 1;
     border-radius: 10px;
     overflow: hidden;
-    position: relative;
+    cursor: pointer;
 
     @include mobile {
-      flex: none;
       width: 50px;
       height: 50px;
       border-radius: 50%;
@@ -35,6 +38,7 @@
       height: 100%;
       object-fit: cover;
     }
+
     span {
       position: absolute;
       bottom: 10px;
@@ -46,10 +50,10 @@
       }
     }
 
-    button {
+    .add-button {
       position: absolute;
-      bottom: 40px;
-      left: 10px;
+      bottom: 10px;
+      right: 10px;
       color: white;
       background-color: #5271ff;
       border: none;
@@ -61,14 +65,90 @@
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    .add-options {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 10px;
+      display: flex;
+
+      button {
+        margin-right: 10px;
+        background-color: #fff;
+        color: #5271ff;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    }
+  }
+
+  &.expanded {
+    .story {
+      flex: none;
+      width: calc(25% - 10px);
+
+      @include tablet {
+        width: calc(33.33% - 10px);
+      }
 
       @include mobile {
-       left: 0;
-       right: 0;
-       top: 0;
-       bottom: 0;
-       margin: auto;
+        width: calc(50% - 10px);
       }
+    }
+  }
+
+  .see-more {
+    display: none; /* Hide the see more button */
+  }
+
+  .full-view {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .full-image {
+      position: relative;
+      max-width: 80%;
+      max-height: 80%;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      .delete-button {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #ff3b3b;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: transparent;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
     }
   }
 }

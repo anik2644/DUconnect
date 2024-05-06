@@ -9,6 +9,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts"
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   return (
@@ -56,7 +57,9 @@ const Profile = () => {
                 <span>Anik</span>
               </div>
             </div>
-            <button>follow</button>
+           <Link to="/editprofile"> {/* Navigate to /editprofile */}
+          <button>Edit Profile</button>
+        </Link>
           </div>
           <div className="right">
             <EmailOutlinedIcon />

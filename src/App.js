@@ -25,6 +25,13 @@ import Terms from "./pages/terms/Terms";
 import Notification from "./pages/notification/Notification";
 import Event from "./pages/event/event";
 import Articledetail from "./pages/artticledetail/articledetail";
+import EditProfilePage from './pages/editprofile/editprofile';
+import Share from "./components/share/Share";
+import posts from './components/posts/Posts';
+import Anik from './pages/anik/anik';
+
+
+
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -47,7 +54,7 @@ function App() {
   };
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return <Navigate to="/login" />;
+      return <Navigate to="/login." />;
     }
     return children;
   };
@@ -93,6 +100,7 @@ function App() {
           path: "/event",
           element: <Event />,
         },
+
       ],
     },
     {
@@ -110,12 +118,23 @@ function App() {
       path: "/readmore",
       element: <Articledetail />,
     },
+    {
+
+
+      path: "/editprofile",
+      element: <EditProfilePage />,
+    },
+    {
+      path: "/anik",
+      element: <Anik/>,
+    },
   ]);
 
   return (
     <div>
       <RouterProvider router={router} />
     </div>
+
   );
 }
 
