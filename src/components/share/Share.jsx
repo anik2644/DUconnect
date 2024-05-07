@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import "./share.scss";
 
-const Share = ({ onShare }) => {
+const Share = (props) => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
@@ -20,7 +20,7 @@ const Share = ({ onShare }) => {
 
   const handleShare = () => {
     // Create a new shared post object
-    const newPost = {
+    const newPost = [{
       id: Math.random(),
       name: currentUser.name,
       userId: currentUser.id,
@@ -29,10 +29,12 @@ const Share = ({ onShare }) => {
       img: selectedImage,
       likes: 0,
       comments: [],
-    };
+    }];
+    props.setPosts(props.posts.unshift(...newPost))
 
     // Invoke the onShare callback to share the post
-    onShare(newPost);
+    // onShare(newPost);
+
 
     // Clear input fields after sharing
     setText("");
