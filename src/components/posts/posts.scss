@@ -1,7 +1,15 @@
-.posts{
+.posts {
   display: flex;
   flex-direction: column;
   gap: 50px;
   height: auto;
   overflow: hidden;
+
+
+  .post {
+    max-width: 100%;
+    height: auto;
+
+
+  }
 }

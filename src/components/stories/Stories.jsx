@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/authContext";
 const Stories = () => {
   const { currentUser } = useContext(AuthContext);
   const [stories, setStories] = useState([
+
     {
       id: 1,
       name: "Anik",

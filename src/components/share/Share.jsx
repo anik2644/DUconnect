@@ -17,7 +17,11 @@ const Share = (props) => {
       reader.readAsDataURL(file);
     }
   };
-
+  const handleKeyDown = (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      handleShare();
+    }
+  };
   const handleShare = () => {
     // Create a new shared post object
     const newPost = [{
@@ -30,11 +34,8 @@ const Share = (props) => {
       likes: 0,
       comments: [],
     }];
-    props.setPosts(props.posts.unshift(...newPost))
 
-    // Invoke the onShare callback to share the post
-    // onShare(newPost);
-
+    props.setPosts(props.posts.unshift(...newPost));
 
     // Clear input fields after sharing
     setText("");
@@ -52,6 +53,7 @@ const Share = (props) => {
             className="post-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
+            onKeyDown={handleKeyDown} // Add onKeyDown event listener
           />
         </div>
         {selectedImage && (

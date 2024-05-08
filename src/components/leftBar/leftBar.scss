@@ -7,8 +7,9 @@
     top: 70px;
     height: calc(100vh - 70px);
     overflow: scroll;
-    background-color: themed("bg");
-    color: themed("textColor");
+    background-color: #e2e2ed;;
+    color: #9a3535;
+    text-shadow: #341515;
 
     @include mobile{
       display: none;
@@ -57,7 +58,9 @@
         .item {
           display: flex;
           align-items: center;
-          gap: 10px;
+          gap:30px;
+          padding-bottom:5%;
+          color: adjust-hue($color: #0a0000, $degrees: 0);
 
           img {
             width: 30px;
