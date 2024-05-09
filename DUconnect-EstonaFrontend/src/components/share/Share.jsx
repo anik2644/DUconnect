@@ -24,8 +24,8 @@ const Share = (props) => {
   };
   const handleShare = () => {
     // Create a new shared post object
-    const currentDate = new Date();
-    console.log("Current date and time:", currentDate.toLocaleString());
+    // const currentDate = new Date();
+    // console.log("Current date and time:", currentDate.toLocaleString());
 
     const postforbackend = {
       name: currentUser.name.toString(),
@@ -33,7 +33,7 @@ const Share = (props) => {
       profilePic: currentUser.profilePic.toString(),
       desc: text.toString(),
       img: selectedImage.toString(),
-      likes: (0).toString(),
+      // likes: (0).toString(),
       
     };
 

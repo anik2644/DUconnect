@@ -40,14 +40,16 @@ myDb = client["Post_Collection"] # scema name
 myCollection = myDb["Post Collection"] # table name
 
 
+
+
 # Configure CORS
-app.add_middleware(
-   CORSMiddleware,
-   allow_origins=["http://localhost:3001"],
-   allow_credentials=True,
-   allow_methods=["GET", "POST", "PUT", "DELETE"],
-   allow_headers=["*"],
-)
+# app.add_middleware(
+#    CORSMiddleware,
+#    allow_origins=["http://localhost:3001"],
+#    allow_credentials=True,
+#    allow_methods=["GET", "POST", "PUT", "DELETE"],
+#    allow_headers=["*"],
+# )
 
 
 # Configure CORS
@@ -60,13 +62,70 @@ app.add_middleware(
 )
 
 
-app.add_middleware(
-   CORSMiddleware,
-   allow_origins=["http://localhost:3000"],
-   allow_credentials=True,
-   allow_methods=["GET", "POST", "PUT", "DELETE"],
-   allow_headers=["*"],
-)
+# app.add_middleware(
+#    CORSMiddleware,
+#    allow_origins=["http://localhost:3000"],
+#    allow_credentials=True,
+#    allow_methods=["GET", "POST", "PUT", "DELETE"],
+#    allow_headers=["*"],
+# )
+profilePic = "https://i.ibb.co/8YkTy5X/399802121-2096661420678789-8201301384481582908-n.jpg"
+img = "https://i.ibb.co/8YkTy5X/399802121-2096661420678789-8201301384481582908-n.jpg?auto=compress&cs=tinysrgb&w=1600"
+
+
+# Sample posts data
+posts = [
+    {
+        "id": 1,
+        "name": "Anik",
+        "userId": 1,
+        "profilePic": "https://i.ibb.co/8YkTy5X/399802121-2096661420678789-8201301384481582908-n.jpg",
+        "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+        "img": "https://i.ibb.co/8YkTy5X/399802121-2096661420678789-8201301384481582908-n.jpg?auto=compress&cs=tinysrgb&w=1600"
+    },
+    {
+        "id": 2,
+        "name": "Eesor",
+        "userId": 1,
+        "profilePic": "https://i.ibb.co/ggyKMj3/279725233-1949964898521765-5705253541412336116-n.jpg",
+        "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+        "img": "https://i.ibb.co/ggyKMj3/279725233-1949964898521765-5705253541412336116-n.jpg?auto=compress&cs=tinysrgb&w=1600"
+    },
+    {
+        "id": 3,
+        "name": "Anik",
+        "userId": 2,
+        "profilePic": "https://i.ibb.co/8YkTy5X/399802121-2096661420678789-8201301384481582908-n.jpg?auto=compress&cs=tinysrgb&w=1600",
+        "desc": "Tenetur iste voluptates dolorem rem commodi voluptate pariatur, voluptatum, laboriosam consequatur enim nostrum cumque! Maiores a nam non adipisci minima modi tempore."
+    }
+]
+
+
+
+def fetchpost() -> List[dict]:
+   
+   print("hello anik")
+   documents_list = []
+   documents = myCollection.find()
+   for document in documents:
+      #   print("anik there\n")
+      #   print(document['desc'])
+        document['id'] = 2 #int(document['id'])
+        document['userId'] =int(document['userid'])
+            # Add new fields
+        document['profilePic'] = profilePic
+        document['img'] = img
+
+    # Delete the '_id' field
+        if '_id' in document:
+            del document['_id']
+            del document['userid']
+        
+
+        
+        documents_list.append(document)
+   return documents_list
+
 
 
 def save_post(post: Post)  -> List[dict]:
@@ -81,23 +140,23 @@ def save_post(post: Post)  -> List[dict]:
         "id": current_time,
         "name": post.name,
         "userid": post.userId,
-        "profilePic": post.profilePic,
+      #   "profilePic": post.profilePic,
         "desc":post.desc,
-        "img":post.img
+      #   "img":post.img
     }
    # #print(myDoc)
    res = myCollection.insert_one(myDoc)
 
 #    asyncio.sleep(2)
 #  Step 2: Reading the document
-   documents_list = []
-   documents = myCollection.find()
-   for document in documents:
-      #   print("anik there\n")
-        print(document)
-        document['_id'] = str(document['_id'])
+   documents_list = fetchpost()  #[]
+#    documents = myCollection.find()
+#    for document in documents:
+#       #   print("anik there\n")
+#         print(document)
+#         document['_id'] = str(document['_id'])
 
-        documents_list.append(document)
+#         documents_list.append(document)
 
       #   print("anik there\n")
       #   documents_list.append(document)
@@ -139,10 +198,23 @@ async def create_post(post: Post):
 
 
 
-@app.get("/")
-async def read_root():
-   print("i am okk")
-   return {"message": "Hello, World!"}
+@app.get("/getpost/")
+async def getPost():# -> List[dict]:
+
+
+   print("mahmuf there\n")
+      #   documents_list.append(document)
+   documents_list =  fetchpost()
+   return documents_list
+
+
+# async def read_root() -> dict:
+#    documents = myCollection.find()
+#    documents_count = myCollection.count_documents({})  # Get the count of documents
+#    return {"message": "User registered successfully", "documents_count": documents_count}
+
+
+
 
 
 
@@ -153,3 +225,7 @@ async def read_root():
 
 
 
+@app.get("/posts/")
+async def get_posts():
+    print("i am okk")
+    return posts
