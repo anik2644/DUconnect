@@ -23,8 +23,11 @@ const Share = (props) => {
     }
   };
   const handleShare = () => {
-    // Assuming currentUser is defined somewhere and contains the necessary data.
-    const newPost = {
+    // Create a new shared post object
+    const currentDate = new Date();
+    console.log("Current date and time:", currentDate.toLocaleString());
+
+    const postforbackend = {
       name: currentUser.name.toString(),
       userId: currentUser.id.toString(),
       profilePic: currentUser.profilePic.toString(),
@@ -33,15 +36,13 @@ const Share = (props) => {
       likes: (0).toString(),
       
     };
-   
-    console.log('New Post Data:', newPost);
 
     fetch('http://127.0.0.1:8000/posts/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newPost),
+      body: JSON.stringify(postforbackend),
     })
     .then(response => {
       if (!response.ok) {
@@ -57,7 +58,29 @@ const Share = (props) => {
     .catch(error => {
       console.error('Error saving post:', error);
     });
-}
+
+    // id: Date.now().toString(),
+
+    console.log("time",Date.now().toString())
+
+    const newPost = [{
+      id: Math.random(),
+      name: currentUser.name,
+      userId: currentUser.id,
+      profilePic: currentUser.profilePic,
+      desc: text,
+      img: selectedImage,
+      likes: 0,
+      comments: [],
+    }];
+
+    props.setPosts(props.posts.unshift(...newPost));
+
+
+    // Clear input fields after sharing
+    setText("");
+    setSelectedImage(null);
+  };
 
   return (
     <div className="share">

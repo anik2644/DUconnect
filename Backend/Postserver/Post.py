@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import pymongo
 import asyncio
+from datetime import datetime
 from typing import List
 from bson import ObjectId  # Import ObjectId from bson module
 
@@ -17,7 +18,7 @@ class Post(BaseModel):
     profilePic: str
     desc: str
     img: str
-    likes: str
+   #  likes: str
     
 
 
@@ -71,15 +72,24 @@ app.add_middleware(
 def save_post(post: Post)  -> List[dict]:
    
    print(":habijabi")
-   # myDoc = {
-   #      "name": post.name,
-   #      "userid": post.userId,
-   #  }
-   # # #print(myDoc)
-   # res = myCollection.insert_one(myDoc)
+   current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]  # Get current time with milliseconds
+
+#  step 1: write to data base
+
+
+   myDoc = {
+        "id": current_time,
+        "name": post.name,
+        "userid": post.userId,
+        "profilePic": post.profilePic,
+        "desc":post.desc,
+        "img":post.img
+    }
+   # #print(myDoc)
+   res = myCollection.insert_one(myDoc)
 
 #    asyncio.sleep(2)
-#  Step 7: Reading the document
+#  Step 2: Reading the document
    documents_list = []
    documents = myCollection.find()
    for document in documents:
