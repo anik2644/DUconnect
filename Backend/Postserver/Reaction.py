@@ -102,6 +102,18 @@ async def AddLike(reaction: Reaction):
 
 
 
+@app.delete("/Like/")
+async def deleteAllReactions():
+    try:
+        # Delete all documents from the Like collection
+        result = LikeCollection.delete_many({})
+        print(f"Deleted {result.deleted_count} reactions")
+        return {"message": f"Deleted {result.deleted_count} reactions"}
+    except Exception as e:
+        print("Error:", e)
+        raise HTTPException(status_code=500, detail="Failed to delete reactions")
+
+
 
 
 @app.get("/Like/")

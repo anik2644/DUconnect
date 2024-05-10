@@ -21,7 +21,7 @@ const Post = ({ post }) => {
 
     const reactionData = {
       userId: 'user123', // Replace with actual userId
-      postId: 'post123', // Replace with actual postId
+      postId: post['id'], // Replace with actual postId
       time: new Date().toISOString(), // Current time in ISO format
     };
   
@@ -47,6 +47,30 @@ const Post = ({ post }) => {
     } catch (error) {
       console.error('Error:', error);
     }
+
+
+    // try {
+    //   // Send a POST request to your backend
+    //   const response = await fetch('http://localhost:8001/Like/', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(reactionData),
+    //   });
+  
+    //   // Check if the request was successful
+    //   if (response.ok) {
+    //     const data = await response.json();
+    //     console.log(JSON.stringify(data, null, 2)); // Log the full response
+    //     console.log('Reaction saved successfully:', data);
+
+    //   } else {
+    //     console.error('Failed to save reaction:', response.statusText);
+    //   }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
 
   };
 
