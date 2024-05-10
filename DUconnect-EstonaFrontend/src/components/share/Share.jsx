@@ -6,17 +6,33 @@ const Share = (props) => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [img_path, setImagepath]= useState("")
+
+  // const handleImageChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const filePath = file.webkitRelativePath || file.name;
+  //     console.log(filePath);
+  //     setSelectedImage(filePath);
+  //   }
+  // };
+  
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+
+      const filePath = file.webkitRelativePath || file.name;
+      setImagepath(filePath);
       const reader = new FileReader();
       reader.onload = (e) => {
-        setSelectedImage(e.target.result);
+        console.log(e.target.result);
+        setSelectedImage(e.target.result); // e.target.result contains the data URL of the selected image
       };
       reader.readAsDataURL(file);
     }
   };
+  
   const handleKeyDown = (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
       handleShare();
@@ -27,15 +43,22 @@ const Share = (props) => {
     // const currentDate = new Date();
     // console.log("Current date and time:", currentDate.toLocaleString());
 
-    const postforbackend = {
+     const postforbackend = {
       name: currentUser.name.toString(),
       userId: currentUser.id.toString(),
       profilePic: currentUser.profilePic.toString(),
       desc: text.toString(),
-      img: selectedImage.toString(),
+      img: img_path,
       // likes: (0).toString(),
       
     };
+    // const formData = new FormData();
+    // formData.append("name", currentUser.name);
+    // formData.append("userId", currentUser.id);
+    // formData.append("profilePic", currentUser.profilePic);
+    // formData.append("desc", text);
+    // formData.append("image", selectedImage); // Append the file to the form data
+  
 
     fetch('http://127.0.0.1:8000/posts/', {
       method: 'POST',
