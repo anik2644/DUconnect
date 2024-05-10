@@ -13,3 +13,38 @@
 
   }
 }
+/* posts.scss */
+
+.post {
+  /* Your existing styles for the post component */
+}
+
+.more-options {
+  position: relative;
+}
+
+.more-icon {
+  cursor: pointer;
+}
+
+.options {
+  position: absolute;
+  top: 30px; /* Adjust this value to position the dropdown menu */
+  right: 0;
+  background-color: #623b3b;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.option {
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.option:hover {
+  background-color: #f5f5f5;
+}

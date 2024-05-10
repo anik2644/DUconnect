@@ -32,12 +32,17 @@ const Posts = (props) => {
     },
   ]);
 
-  props.setPosts(posts)
+  const deletePost = (postId) => {
+    const updatedPosts = posts.filter(post => post.id !== postId);
+    setPosts(updatedPosts);
+  };
+
+  props.setPosts(posts);
 
   return (
     <div className="posts">
       {posts.map((post) => (
-        <Post post={post} key={post.id} />
+        <Post post={post} key={post.id} onDelete={deletePost} />
       ))}
     </div>
   );
