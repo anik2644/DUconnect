@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi import Query
 import pymongo
 import asyncio
 from datetime import datetime
@@ -102,16 +103,24 @@ async def AddLike(reaction: Reaction):
 
 
 
-@app.delete("/Like/")
-async def deleteAllReactions():
+
+@app.delete("/Unlike/")  
+async def deleteLikeByPostId(post_id: str = Query(..., alias="postId")):
+    print("in delete like")
     try:
-        # Delete all documents from the Like collection
-        result = LikeCollection.delete_many({})
-        print(f"Deleted {result.deleted_count} reactions")
-        return {"message": f"Deleted {result.deleted_count} reactions"}
+        # Delete the like document with matching postId
+        result = LikeCollection.delete_one({"postId": post_id})
+
+        if result.deleted_count == 1:
+            print(f"Deleted like for post ID: {post_id}")
+            return {"message": f"Like for post ID: {post_id} deleted successfully"}
+        else:
+            # No matching like found
+            return {"message": f"No like found for post ID: {post_id}"}, 404
+
     except Exception as e:
         print("Error:", e)
-        raise HTTPException(status_code=500, detail="Failed to delete reactions")
+        raise HTTPException(status_code=500, detail="Failed to delete like")
 
 
 
@@ -124,6 +133,19 @@ async def getLike():# -> List[dict]:
       #   documents_list.append(document)
    documents_list =  fetchReaction()
    return documents_list
+
+
+@app.delete("/Like/")
+async def deleteAllReactions():
+    try:
+        # Delete all documents from the Like collection
+        result = LikeCollection.delete_many({})
+        print(f"Deleted {result.deleted_count} reactions")
+        return {"message": f"Deleted {result.deleted_count} reactions"}
+    except Exception as e:
+        print("Error:", e)
+        raise HTTPException(status_code=500, detail="Failed to delete reactions")
+
 
 
 

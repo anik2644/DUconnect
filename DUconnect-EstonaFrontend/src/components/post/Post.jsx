@@ -14,21 +14,19 @@ const Post = ({ post }) => {
   const [likesCount, setLikesCount] = useState(12); // Initial likes count
 
   const handleLikeClick = async () => {
-    // Toggle the liked state
-    setLiked((prevLiked) => !prevLiked);
-    // Update likes count based on current liked state
-    setLikesCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
-
     const reactionData = {
       userId: 'user123', // Replace with actual userId
-      postId: post['id'], // Replace with actual postId
+      postId: post.id, // Replace with actual postId
       time: new Date().toISOString(), // Current time in ISO format
     };
   
     try {
-      // Send a POST request to your backend
-      const response = await fetch('http://localhost:8001/Like/', {
-        method: 'POST',
+      const url = liked ? `http://localhost:8001/Unlike/?postId=${post.id}` : 'http://localhost:8001/Like/';
+      const method = liked ? 'DELETE' : 'POST';
+  
+      // Send the request to your backend
+      const response = await fetch(url, {
+        method,
         headers: {
           'Content-Type': 'application/json',
         },
@@ -39,40 +37,19 @@ const Post = ({ post }) => {
       if (response.ok) {
         const data = await response.json();
         console.log(JSON.stringify(data, null, 2)); // Log the full response
-        console.log('Reaction saved successfully:', data);
-
+  
+        // Update likes count locally if successful
+        setLikesCount(prevCount => liked ? prevCount - 1 : prevCount + 1);
+        setLiked(!liked); // Toggle liked state
       } else {
-        console.error('Failed to save reaction:', response.statusText);
+        console.error(liked ? 'Failed to remove like' : 'Failed to save like', response.statusText);
       }
     } catch (error) {
       console.error('Error:', error);
     }
-
-
-    // try {
-    //   // Send a POST request to your backend
-    //   const response = await fetch('http://localhost:8001/Like/', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(reactionData),
-    //   });
-  
-    //   // Check if the request was successful
-    //   if (response.ok) {
-    //     const data = await response.json();
-    //     console.log(JSON.stringify(data, null, 2)); // Log the full response
-    //     console.log('Reaction saved successfully:', data);
-
-    //   } else {
-    //     console.error('Failed to save reaction:', response.statusText);
-    //   }
-    // } catch (error) {
-    //   console.error('Error:', error);
-    // }
-
   };
+
+  
 
   return (
     <div className="post">
