@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const ArticlePage = () => {
     const [articles, setArticles] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [newArticle, setNewArticle] = useState({ title: '', imageUrl: '', content: '' });
+    const [newArticle, setNewArticle] = useState({ title: '', imageFile: null, content: '' });
     const [errorMessage, setErrorMessage] = useState('');
 
     // Default list of articles
@@ -32,21 +32,23 @@ const ArticlePage = () => {
     }, [articles]);
 
     const handleAddArticle = () => {
-        if (!newArticle.title.trim() || !newArticle.imageUrl.trim() || !newArticle.content.trim()) {
-            setErrorMessage('Please provide title, image URL, and content.');
+        if (!newArticle.title.trim() || !newArticle.imageFile || !newArticle.content.trim()) {
+            setErrorMessage('Please provide title, image, and content.');
             return;
         }
 
         const newId = articles.length + 1;
-        setArticles([...articles, { id: newId, ...newArticle }]);
+        const imageUrl = URL.createObjectURL(newArticle.imageFile); // Create URL for the uploaded image
+        setArticles([...articles, { id: newId, title: newArticle.title, imageUrl, content: newArticle.content }]);
         setShowModal(false);
-        setNewArticle({ title: '', imageUrl: '', content: '' });
+        setNewArticle({ title: '', imageFile: null, content: '' });
         setErrorMessage('');
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setNewArticle({ ...newArticle, [name]: value });
+        const { name, value, type } = e.target;
+        const inputValue = type === 'file' ? e.target.files[0] : value;
+        setNewArticle({ ...newArticle, [name]: inputValue });
     };
 
     const handleDeleteArticle = (id) => {
@@ -84,7 +86,7 @@ const ArticlePage = () => {
                         <h2>Add New Article</h2>
                         <form onSubmit={handleAddArticle}>
                             <input type="text" name="title" value={newArticle.title} onChange={handleInputChange} placeholder="Title" />
-                            <input type="text" name="imageUrl" value={newArticle.imageUrl} onChange={handleInputChange} placeholder="Image URL" />
+                            <input type="file" name="imageFile" onChange={handleInputChange} />
                             <textarea name="content" value={newArticle.content} onChange={handleInputChange} placeholder="Content"></textarea>
                             <button type="submit">Add</button>
                         </form>
