@@ -2,6 +2,7 @@ import '@fortawesome/fontawesome-free/css/all.css';
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import BloodDonation from "./pages/Blood/BloodDonation"; // Import BloodDonation component
+import BloodList from './pages/Blood/BloodList';
 import Navbar from "./components/navbar/Navbar";
 import LeftBar from "./components/leftBar/LeftBar";
 import RightBar from "./components/rightBar/RightBar";
@@ -79,6 +80,10 @@ function App() {
         {
           path: "/blood-donation",
           element: <BloodDonation />,
+        },
+        {
+          path: "/blood-list",
+          element: <BloodList />,
         },
         {
           path: "/article",
