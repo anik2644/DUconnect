@@ -29,6 +29,7 @@ import EditProfilePage from './pages/editprofile/editprofile';
 import Share from "./components/share/Share";
 import posts from './components/posts/Posts';
 import Anik from './pages/anik/anik';
+import CreateEvent from "./pages/CreateEvent/eventManagement";
 
 
 
@@ -100,6 +101,10 @@ function App() {
           path: "/event",
           element: <Event />,
         },
+        {
+          path: "/CreateEvent",
+          element: <CreateEvent />,
+        }
 
       ],
     },

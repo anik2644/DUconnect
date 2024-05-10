@@ -1,69 +1,53 @@
-// EventPage.jsx
-import React, { useState, useEffect } from "react";
-import "./eventPage.scss";
+import React from "react";
+import "./event.css";
+import '../../style.scss';
+import { Link } from 'react-router-dom';
 
 const EventPage = () => {
-  const [events, setEvents] = useState([]);
-  const [upcomingEvents, setUpcomingEvents] = useState([]);
-  const [highlightedEvent, setHighlightedEvent] = useState(null);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+    // Sample data for events with image URLs
+    const events = [
+        { id: 1, title: 'Event 1', imageUrl: 'https://i.ibb.co/N22nbCJ/Du-metro.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 2, title: 'Event 2', imageUrl: 'https://i.ibb.co/CH8K04b/cz.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 3, title: 'Event 3', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 4, title: 'Event 4', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 5, title: 'Event 5', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 6, title: 'Event 6', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 7, title: 'Event 7', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 8, title: 'Event 8', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 9, title: 'Event 9', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 10, title: 'Event 10', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+    ];
 
-  useEffect(() => {
-    // Fetch event data from API or define locally
-    const fetchData = async () => {
-      try {
-        // Fetch event data from an API endpoint
-        const response = await fetch("API_ENDPOINT_URL");
-        if (response.ok) {
-          const data = await response.json();
-          setEvents(data.events);
-          // Extract upcoming events and highlighted event
-          const upcoming = data.events.filter((event) => event.date > new Date());
-          setUpcomingEvents(upcoming);
-          if (upcoming.length > 0) {
-            setHighlightedEvent(upcoming[0]);
-          }
-        } else {
-          throw new Error("Failed to fetch events");
-        }
-      } catch (error) {
-        console.error("Error fetching events:", error);
-      }
-    };
+    return (
+        <div className="event-page">
+            <header className="event-header">
+                <div className="event-header-content">
+                    <h1 className="event-title">DU events</h1>
+                    <Link to="/CreateEvent" className="Create-Event">Create Event</Link>
+                </div>
+            </header>
 
-    fetchData();
-  }, []);
-
-  const handleGetTicket = () => {
-    // Handle ticket booking logic here
-    // You can open a calendar or any other UI for selecting date and time slot
-    // Update selectedDate and selectedTimeSlot state accordingly
-  };
-
-  return (
-    <div className="event-page">
-      {highlightedEvent && (
-        <div className="highlighted-event">
-          <h2>Upcoming Event</h2>
-          <div className="event-details">
-            <img src={highlightedEvent.coverPhoto} alt="Event Cover" />
-            <div className="description">
-              <h3>{highlightedEvent.title}</h3>
-              <p>{highlightedEvent.description}</p>
-              <button onClick={handleGetTicket}>Get Ticket</button>
-            </div>
-          </div>
+            <main className="event-main">
+                <section className="event-list">
+                    {events.map(event => (
+                        <div key={event.id} className="event-item">
+                            <div className="event-image" style={{ backgroundImage: `url(${event.imageUrl})` }}></div>
+                            <div className="event-content">
+                                <h2>{event.title}</h2>
+                                <p>{event.description}</p>
+                                <button className="read-more-btn">
+                                    <Link to={`/event/${event.id}`} className="read-more-link">Read More</Link>
+                                </button>
+                            </div>
+                        </div>
+                    ))}
+                </section>
+            </main>
+            <footer className="event-footer">
+                <p>Explore more events on DU Connect!</p>
+            </footer>
         </div>
-      )}
-      <div className="upcoming-events">
-        <h2>Upcoming Events</h2>
-        <div className="event-list">
-
-        </div>
-      </div>
-    </div>
-  );
-};
+    );
+}
 
 export default EventPage;

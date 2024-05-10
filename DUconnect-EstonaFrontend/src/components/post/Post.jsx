@@ -13,11 +13,41 @@ const Post = ({ post }) => {
   const [liked, setLiked] = useState(false);
   const [likesCount, setLikesCount] = useState(12); // Initial likes count
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
     // Toggle the liked state
     setLiked((prevLiked) => !prevLiked);
     // Update likes count based on current liked state
     setLikesCount((prevCount) => (liked ? prevCount - 1 : prevCount + 1));
+
+    const reactionData = {
+      userId: 'user123', // Replace with actual userId
+      postId: 'post123', // Replace with actual postId
+      time: new Date().toISOString(), // Current time in ISO format
+    };
+  
+    try {
+      // Send a POST request to your backend
+      const response = await fetch('http://localhost:8001/Like/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(reactionData),
+      });
+  
+      // Check if the request was successful
+      if (response.ok) {
+        const data = await response.json();
+        console.log(JSON.stringify(data, null, 2)); // Log the full response
+        console.log('Reaction saved successfully:', data);
+
+      } else {
+        console.error('Failed to save reaction:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+
   };
 
   return (

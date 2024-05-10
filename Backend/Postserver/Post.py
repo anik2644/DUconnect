@@ -110,7 +110,7 @@ def fetchpost() -> List[dict]:
    for document in documents:
       #   print("anik there\n")
       #   print(document['desc'])
-        document['id'] = 2 #int(document['id'])
+        # document['id'] = 2 #int(document['id'])
         document['userId'] =int(document['userid'])
             # Add new fields
         document['profilePic'] = profilePic
