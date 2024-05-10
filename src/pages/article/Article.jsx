@@ -6,22 +6,23 @@ const ArticlePage = () => {
     const [articles, setArticles] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [newArticle, setNewArticle] = useState({ title: '', imageUrl: '', content: '' });
+    const [errorMessage, setErrorMessage] = useState('');
 
     // Default list of articles
     const defaultArticles = [
-        { id: 1, title: 'Metro DU ', imageUrl: 'https://i.ibb.co/N22nbCJ/Du-metro.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 1, title: 'Metro DU', imageUrl: 'https://i.ibb.co/N22nbCJ/Du-metro.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 2, title: 'Curzon', imageUrl: 'https://i.ibb.co/CH8K04b/cz.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 3, title: 'Price', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 4, title: 'Article 4', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 4, title: 'Article 4', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 3, title: 'Article 3', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 4, title: 'Article 4', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
     ];
 
     useEffect(() => {
         const storedArticles = JSON.parse(localStorage.getItem('articles'));
         console.log("Articles retrieved from local storage:", storedArticles);
-        if (storedArticles) {
+        if (storedArticles && storedArticles.length > 0) {
             setArticles(storedArticles);
+        } else {
+            setArticles(defaultArticles); // Set default articles if no articles are stored
         }
     }, []);
 
@@ -30,18 +31,18 @@ const ArticlePage = () => {
         console.log("Articles stored in local storage:", articles);
     }, [articles]);
 
-    useEffect(() => {
-        setArticles(defaultArticles);
-    }, []);
+    const handleAddArticle = () => {
+        if (!newArticle.title.trim() || !newArticle.imageUrl.trim() || !newArticle.content.trim()) {
+            setErrorMessage('Please provide title, image URL, and content.');
+            return;
+        }
 
-   const handleAddArticle = () => {
-    const newId = articles.length + 1;
-    // Create a new array with the new article at the beginning and spread the existing articles after it
-    setArticles([{ id: newId, ...newArticle }, ...articles]);
-    setShowModal(false);
-    setNewArticle({ title: '', imageUrl: '', content: '' });
-};
-
+        const newId = articles.length + 1;
+        setArticles([...articles, { id: newId, ...newArticle }]);
+        setShowModal(false);
+        setNewArticle({ title: '', imageUrl: '', content: '' });
+        setErrorMessage('');
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -74,11 +75,7 @@ const ArticlePage = () => {
                 </section>
             </main>
 
-
-
-                <button onClick={() => setShowModal(true)} className="add-article-btn">Add Article</button>
-
-
+            <button onClick={() => setShowModal(true)} className="add-article-btn">Add Article</button>
 
             {showModal && (
                 <div className="add-article-modal">
@@ -91,6 +88,7 @@ const ArticlePage = () => {
                             <textarea name="content" value={newArticle.content} onChange={handleInputChange} placeholder="Content"></textarea>
                             <button type="submit">Add</button>
                         </form>
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
                     </div>
                 </div>
             )}
