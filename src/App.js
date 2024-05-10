@@ -47,7 +47,7 @@ function App() {
           <div style={{ flex: 6 }}>
             <Outlet />
           </div>
-          <RightBar />
+
         </div>
       </div>
     );
