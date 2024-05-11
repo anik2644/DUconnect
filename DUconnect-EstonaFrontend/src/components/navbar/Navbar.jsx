@@ -16,6 +16,10 @@ const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
 
+  const handleSearchClick = () => {
+    // Handle search functionality
+  };
+
   return (
     <div className="navbar">
       <div className="left">
@@ -28,21 +32,24 @@ const Navbar = () => {
         ) : (
           <DarkModeOutlinedIcon onClick={toggle} />
         )}
-        <GridViewOutlinedIcon />
-        <div className="search">
+
+        <div className="search" onClick={handleSearchClick}>
           <SearchOutlinedIcon />
           <input type="text" placeholder="Search..." />
         </div>
       </div>
       <div className="right">
-        <PersonOutlinedIcon />
-        <EmailOutlinedIcon />
-        <NotificationsOutlinedIcon />
+        <Link to="/profile">
+          <PersonOutlinedIcon />
+        </Link>
+        <a href="https://mail.google.com/">
+          <EmailOutlinedIcon />
+        </a>
+        <Link to="/notification">
+          <NotificationsOutlinedIcon />
+        </Link>
         <div className="user">
-          <img
-            src={currentUser.profilePic}
-            alt=""
-          />
+          <img src={currentUser.profilePic} alt="" />
           <span>{currentUser.name}</span>
         </div>
       </div>

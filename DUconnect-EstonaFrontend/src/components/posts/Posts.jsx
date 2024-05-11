@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Post from "../post/Post";
 import "./posts.scss";
 
-const Posts = () => {
+const Posts = (props) => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Posts = () => {
         console.log("mhd mahmud anik");
          console.log(JSON.stringify(data, null, 2));
          setPosts(data);
-        
+         props.setPosts(posts);
           // Print response from the server
         // Optionally, you can perform any actions with the fetched posts data here.
       })
