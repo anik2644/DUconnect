@@ -59,6 +59,8 @@ const ArticlePage = () => {
         <div className="article-page">
             <header className="article-header">
                 <h1 className="article-title">DU Articles</h1>
+                 <button onClick={() => setShowModal(true)} className="add-article-btn">Add Articles</button>
+
             </header>
 
             <main className="article-main">
@@ -77,7 +79,7 @@ const ArticlePage = () => {
                 </section>
             </main>
 
-            <button onClick={() => setShowModal(true)} className="add-article-btn">Add Article</button>
+
 
             {showModal && (
                 <div className="add-article-modal">

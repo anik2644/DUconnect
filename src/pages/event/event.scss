@@ -34,8 +34,8 @@
     border: 2px solid #007bff;
     border-radius: 10px;
     padding: 40px;
-    max-width: 1200px;
-    height: auto;
+    max-width: 1000px;
+    height: 70%;
     margin: auto;
     transition: transform 0.3s ease;
 
@@ -44,7 +44,7 @@
     }
 
     .cover-photo {
-      flex: 1;
+      flex: 0.5;
       overflow: hidden;
       position: relative;
       border-radius: 10px;

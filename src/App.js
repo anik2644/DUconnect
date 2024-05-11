@@ -29,6 +29,8 @@ import EditProfilePage from './pages/editprofile/editprofile';
 import Share from "./components/share/Share";
 import posts from './components/posts/Posts';
 import Anik from './pages/anik/anik';
+import ForgetPasswordPage from './pages/forgetpassword/ForgetPasswordPage';
+import ResetPasswordPage from './pages/resetpassword/reset';
 
 
 
@@ -128,6 +130,14 @@ function App() {
     {
       path: "/anik",
       element: <Anik/>,
+    },
+    {
+      path: "/forgetpassword",
+      element: <ForgetPasswordPage/>,
+    },
+    {
+      path: "/resetpassword",
+      element: <ResetPasswordPage/>,
     },
   ]);
 

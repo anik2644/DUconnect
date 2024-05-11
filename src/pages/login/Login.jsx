@@ -1,17 +1,14 @@
 import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/authContext";
 import "./login.scss";
 
 const Login = () => {
   const { login } = useContext(AuthContext);
-  const navigate = useNavigate(); // Use useNavigate hook
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    // Perform login action
     login();
-
-    // Redirect to Home page
     navigate("/");
   };
 
@@ -20,9 +17,7 @@ const Login = () => {
       <div className="card">
         <div className="left">
           <h1>DUconnect</h1>
-          <p>
-           A Social media hub of Dhaka University
-          </p>
+          <p>A Social media hub of Dhaka University</p>
           <span>Don't you have an account?</span>
           <Link to="/register">
             <button>Register</button>
@@ -33,7 +28,8 @@ const Login = () => {
           <form>
             <input type="text" placeholder="Username" />
             <input type="password" placeholder="Password" />
-            <button type="button" onClick={handleLogin}>Login</button> {/* Modified to type="button" */}
+            <button type="button" onClick={handleLogin}>Login</button>
+            <Link to="/forgetpassword">Forget Password?</Link> {/* Added Forgot Password link */}
           </form>
         </div>
       </div>

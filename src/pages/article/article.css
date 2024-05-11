@@ -3,7 +3,9 @@
 }
 
 .article-header {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
 }
 
@@ -11,6 +13,22 @@
     font-size: 28px;
     font-weight: bold;
     color: #932929;
+    margin: 0;
+}
+
+.add-article-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-article-btn:hover {
+    background-color: #0056b3;
 }
 
 .article-main {
@@ -20,10 +38,9 @@
 
 .article-list {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Display three articles in a row */
+    grid-template-columns: repeat(3, 1fr);
     gap: 90px;
 }
-
 
 .article-item {
     border-radius: 10px;
@@ -75,21 +92,6 @@
 
 .delete-article-btn:hover {
     background-color: #d13e28;
-}
-
-.add-article-btn {
-    background-color: #047cfc;
-    color: #fff;
-    border: none;
-    padding: 15px 30px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 20px;
-}
-
-.add-article-btn:hover {
-    background-color: #0056b3;
 }
 
 .add-article-modal {
