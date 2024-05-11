@@ -57,50 +57,100 @@ const handleChange = (e) => {
           hall: formData.hall,
           password: formData.password
         }),
-      });
-      if (response.ok) {
+      }) .then(response => {
+        if (!response.ok) {
+          
+          window.alert("Email Already exists. Please choose a different email.");
+          // window.alert("Server Failed");
+          throw new Error('Failed to save post');
+
+        }
+
+        // if (response.status == 100) {
+        //   window.alert("Email Already exists. Please choose a different email.");
+        //   throw new Error('Email Already exists');
+        // }
+        return response.json();
+      })
+      .then(data => {
+
+        console.log(JSON.stringify(data, null, 2)); // Print response from the server
         window.alert("Registration Successful!");
-        setFormData({ // Reset form data
-          userId: "",
-          username: "",
-          name: "",
-          email: "",
-          department: "",
-          registrationNo: "",
-          session: "",
-          hall: "",
-          password: "",
-        });
-      } else {
-        const data = await response.json(); // Parse error response
-        window.alert(data.detail); // Display error message from backend
-        setFormData({ // Reset form data
-          userId: "",
-          username: "",
-          name: "",
-          email: "",
-          department: "",
-          registrationNo: "",
-          session: "",
-          hall: "",
-          password: "",
-        });
-      }
-    } catch (error) {
-      window.alert("Error!");
-      setFormData({ // Reset form data
-        userId: "",
-        username: "",
-        name: "",
-        email: "",
-        department: "",
-        registrationNo: "",
-        session: "",
-        hall: "",
-        password: "",
+      //  if(response.status != 200)
+      //   {
+      //     console.log(JSON.stringify(data, null, 2)); // Print response from the server
+      //     window.alert("Registration Successful!");
+      //   }
+        // Reset form data if needed
+        // setFormData({
+        //   userId: "",
+        //   username: "",
+        //   name: "",
+        //   email: "",
+        //   department: "",
+        //   registrationNo: "",
+        //   session: "",
+        //   hall: "",
+        //   password: "",
+        // });
+      })
+      .catch(error => {
+        console.error('Error saving post:', error);
       });
+
+
+
+
+      // if (response.ok) {
+      //   window.alert("Registration Successful!");
+
+
+
+
+
+      //   setFormData({ // Reset form data
+      //     userId: "",
+      //     username: "",
+      //     name: "",
+      //     email: "",
+      //     department: "",
+      //     registrationNo: "",
+      //     session: "",
+      //     hall: "",
+      //     password: "",
+      //   });
+      // } else {
+      //   const data = await response.json(); // Parse error response
+      //   window.alert(data.detail); // Display error message from backend
+      //   // setFormData({ // Reset form data
+      //   //   userId: "",
+      //   //   username: "",
+      //   //   name: "",
+      //   //   email: "",
+      //   //   department: "",
+      //   //   registrationNo: "",
+      //   //   session: "",
+      //   //   hall: "",
+      //   //   password: "",
+      //   // });
+      // }
+
+
+    } catch (error) {
+      // window.alert("Error!");
+      // setFormData({ // Reset form data
+      //   userId: "",
+      //   username: "",
+      //   name: "",
+      //   email: "",
+      //   department: "",
+      //   registrationNo: "",
+      //   session: "",
+      //   hall: "",
+      //   password: "",
+      // });
     }
-    setTimeout(() => window.alert(""), 1000); // Clear message after 1 second
+    // setTimeout(() => window.alert(""), 300); // Clear message after 1 second
   };
   
 
@@ -224,6 +274,7 @@ const handleChange = (e) => {
             {fieldErrors.password && (
               <p className="error">{fieldErrors.password}</p>
             )}
+            
             <button type="submit">Register</button>
           </form>
         </div>
@@ -236,5 +287,5 @@ const handleChange = (e) => {
     </div>
   );
 };
-
+//{/* <Link to="/" className="Create-Event"> <button type="submit">Register</button></Link> */}
 export default Register;
