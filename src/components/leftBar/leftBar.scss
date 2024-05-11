@@ -2,30 +2,26 @@
 
 .leftBar {
   @include themify($themes) {
-    flex: 2;
+    flex: 1.5; /* Adjust the width of the left bar */
     position: sticky;
-    top: 70px;
-    height: calc(200vh - 90px);
-    overflow: scroll;
-    background-color: #e2e2ed;;
+    top: 0;
+    height: calc(100vh - 90px); /* Adjusted to fit the viewport height */
+    overflow-y: auto; /* Changed to auto for better scrolling behavior */
+    background-color: #e2e2ed;
     color: #9a3535;
-    text-shadow: #341515;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle text shadow for depth */
 
-    @include mobile{
-      display: none;
-    }
-
-    &::-webkit-scrollbar {
-      display: none;
+    @include mobile {
+      display: none; /* Hide the left bar on mobile devices */
     }
 
     .container {
       padding: 20px;
 
       hr {
-        margin: 20px 0px;
+        margin: 20px 0;
         border: none;
-        height: 0.5px;
+        height: 1px; /* Increase the height of the separator */
         background-color: themed("border");
       }
 
@@ -35,7 +31,9 @@
         gap: 20px;
 
         span {
-          font-size: 12px;
+          font-size: 20px;
+          font-weight: bold; /* Make menu headings bold */
+          color: #555; /* Adjust color for menu headings */
         }
 
         .user {
@@ -44,30 +42,38 @@
           gap: 10px;
 
           img {
-            width: 30px;
-            height: 30px;
+            width: 40px; /* Increase the size of the profile picture */
+            height: 40px;
             border-radius: 50%;
             object-fit: cover;
           }
 
           span {
-            font-size: 14px;
+            font-size: 18px; /* Decrease font size for username */
+            color: #333; /* Adjust color for username */
           }
         }
 
         .item {
           display: flex;
           align-items: center;
-          gap:30px;
-          padding-bottom:5%;
-          color: adjust-hue($color: #0a0000, $degrees: 0);
+          gap: 20px; /* Adjust gap between icon and text */
+          padding: 10px 15px; /* Add padding to menu items */
+          border-radius: 5px; /* Add border radius to menu items for a rounded look */
+          transition: background-color 0.3s ease;
+
+          &:hover {
+            background-color: #ddd; /* Change background color on hover */
+          }
 
           img {
             width: 30px;
+            height: 30px;
           }
 
           span {
-            font-size: 14px;
+            font-size: 17px;
+            color: #615656; /* Adjust color for menu item text */
           }
         }
       }

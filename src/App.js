@@ -40,16 +40,17 @@ function App() {
 
   const Layout = () => {
     return (
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
-        <Navbar />
-        <div style={{ display: "flex" }}>
-          <LeftBar />
-          <div style={{ flex: 6 }}>
+     <div className={`theme-${darkMode ? "dark" : "light"}`}>
+    <Navbar />
+    <div style={{ display: "flex" }}>
+        <LeftBar />
+        <div style={{ flex: 6 }}>
             <Outlet />
-          </div>
-
         </div>
-      </div>
+        <RightBar />
+    </div>
+</div>
+
     );
   };
   const ProtectedRoute = ({ children }) => {
