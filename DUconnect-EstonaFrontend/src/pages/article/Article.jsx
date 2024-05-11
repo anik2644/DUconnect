@@ -1,23 +1,57 @@
-import "../../style.scss"
-import React from 'react';
-import './article.css'; // Import your custom CSS file for styling
-import '../../style.scss';
+import React, { useState, useEffect } from 'react';
+import './article.css';
 import { Link } from 'react-router-dom';
 
 const ArticlePage = () => {
-    // Sample data for articles with image URLs
-    const articles = [
-        { id: 1, title: 'Article 1', imageUrl: 'https://i.ibb.co/N22nbCJ/Du-metro.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 2, title: 'Article 2', imageUrl: 'https://i.ibb.co/CH8K04b/cz.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+    const [articles, setArticles] = useState([]);
+    const [showModal, setShowModal] = useState(false);
+    const [newArticle, setNewArticle] = useState({ title: '', imageUrl: '', content: '' });
+    const [errorMessage, setErrorMessage] = useState('');
+
+    // Default list of articles
+    const defaultArticles = [
+        { id: 1, title: 'Metro DU', imageUrl: 'https://i.ibb.co/N22nbCJ/Du-metro.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
+        { id: 2, title: 'Curzon', imageUrl: 'https://i.ibb.co/CH8K04b/cz.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 3, title: 'Article 3', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
         { id: 4, title: 'Article 4', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 5, title: 'Article 5', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 6, title: 'Article 6', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 7, title: 'Article 7', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 8, title: 'Article 8', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 9, title: 'Article 9', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
-        { id: 10, title: 'Article 10', imageUrl: 'https://i.ibb.co/N7gC0JW/20240207132850-IMG-3948.jpg', content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et felis justo.' },
     ];
+
+    useEffect(() => {
+        const storedArticles = JSON.parse(localStorage.getItem('articles'));
+        console.log("Articles retrieved from local storage:", storedArticles);
+        if (storedArticles && storedArticles.length > 0) {
+            setArticles(storedArticles);
+        } else {
+            setArticles(defaultArticles); // Set default articles if no articles are stored
+        }
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('articles', JSON.stringify(articles));
+        console.log("Articles stored in local storage:", articles);
+    }, [articles]);
+
+    const handleAddArticle = () => {
+        if (!newArticle.title.trim() || !newArticle.imageUrl.trim() || !newArticle.content.trim()) {
+            setErrorMessage('Please provide title, image URL, and content.');
+            return;
+        }
+
+        const newId = articles.length + 1;
+        setArticles([...articles, { id: newId, ...newArticle }]);
+        setShowModal(false);
+        setNewArticle({ title: '', imageUrl: '', content: '' });
+        setErrorMessage('');
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setNewArticle({ ...newArticle, [name]: value });
+    };
+
+    const handleDeleteArticle = (id) => {
+        setArticles(articles.filter(article => article.id !== id));
+    };
 
     return (
         <div className="article-page">
@@ -33,17 +67,31 @@ const ArticlePage = () => {
                             <div className="article-content">
                                 <h2>{article.title}</h2>
                                 <p>{article.content}</p>
-                                <button className="read-more-btn">
-                            <Link to="/readmore" className="read-more-link">Read More</Link>
-                        </button>
+                                <Link to='/readmore' className="read-more-link">Read More</Link>
+                                <button className="delete-article-btn" onClick={() => handleDeleteArticle(article.id)}>delete</button>
                             </div>
                         </div>
                     ))}
                 </section>
             </main>
-            <footer className="article-footer">
-                <p>Explore more articles on DU Connect!</p>
-            </footer>
+
+            <button onClick={() => setShowModal(true)} className="add-article-btn">Add Article</button>
+
+            {showModal && (
+                <div className="add-article-modal">
+                    <div className="modal-content">
+                        <span className="close-btn" onClick={() => setShowModal(false)}>X</span>
+                        <h2>Add New Article</h2>
+                        <form onSubmit={handleAddArticle}>
+                            <input type="text" name="title" value={newArticle.title} onChange={handleInputChange} placeholder="Title" />
+                            <input type="text" name="imageUrl" value={newArticle.imageUrl} onChange={handleInputChange} placeholder="Image URL" />
+                            <textarea name="content" value={newArticle.content} onChange={handleInputChange} placeholder="Content"></textarea>
+                            <button type="submit">Add</button>
+                        </form>
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
