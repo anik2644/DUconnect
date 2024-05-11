@@ -1,75 +1,291 @@
+/*import { useState } from "react";
 import "./profile.scss";
-import FacebookTwoToneIcon from "@mui/icons-material/FacebookTwoTone";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import PinterestIcon from "@mui/icons-material/Pinterest";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import PlaceIcon from "@mui/icons-material/Place";
-import LanguageIcon from "@mui/icons-material/Language";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Posts from "../../components/posts/Posts"
+import { CameraAlt } from "@mui/icons-material"; // Import camera icon from MUI
+import Posts from "../../components/posts/Posts";
 import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [coverPhoto, setCoverPhoto] = useState(null);
+
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePicture(file);
+  };
+
+  const handleCoverPhotoChange = (e) => {
+    const file = e.target.files[0];
+    setCoverPhoto(file);
+  };
+
   return (
     <div className="profile">
       <div className="images">
-        <img
-          src="https://i.ibb.co/ggyKMj3/279725233-1949964898521765-5705253541412336116-n.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-          alt=""
-          className="cover"
-        />
-        <img
-          src="https://i.ibb.co/ggyKMj3/279725233-1949964898521765-5705253541412336116-n.jpg?auto=compress&cs=tinysrgb&w=1600&lazy=load"
-          alt=""
-          className="profilePic"
+        <label htmlFor="profilePictureInput">
+          <div className="imageContainer">
+            <img
+              src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
+              alt=""
+              className={profilePicture ? "cover" : "placeholder"}
+            />
+            {!profilePicture && (
+              <div className="placeholderContent">
+                <CameraAlt fontSize="large" />
+              </div>
+            )}
+          </div>
+        </label>
+        <input
+          id="profilePictureInput"
+          type="file"
+          accept="image/*"
+          onChange={handleProfilePictureChange}
+          style={{ display: "none" }}
         />
       </div>
       <div className="profileContainer">
-        <div className="uInfo">
-          <div className="left">
-            <a href="http://facebook.com">
-              <FacebookTwoToneIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <InstagramIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <TwitterIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <LinkedInIcon fontSize="large" />
-            </a>
-            <a href="http://facebook.com">
-              <PinterestIcon fontSize="large" />
-            </a>
-          </div>
-          <div className="center">
-            <span>Anik</span>
-            <div className="info">
-              <div className="item">
-                <PlaceIcon />
-                <span>Dhaka</span>
-              </div>
-              <div className="item">
-                <LanguageIcon />
-                <span>Anik</span>
-              </div>
-            </div>
-           <Link to="/editprofile"> {/* Navigate to /editprofile */}
-          <button>Edit Profile</button>
-        </Link>
-          </div>
-          <div className="right">
-            <EmailOutlinedIcon />
-            <MoreVertIcon />
-          </div>
-        </div>
-      <Posts/>
       </div>
     </div>
   );
 };
 
 export default Profile;
+*/
+//////////
+/*
+import { useState, useEffect } from "react";
+import "./profile.scss";
+import { CameraAlt, Edit } from "@mui/icons-material"; // Import camera and edit icons from MUI
+import { Link } from "react-router-dom";
+
+const Profile = () => {
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [userInfo, setUserInfo] = useState({
+    userId: "",
+    username: "",
+    name: "",
+    email: "",
+    department: "",
+    registrationNo: "",
+    session: "",
+    hall: "",
+    password: "",
+  });
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    // Fetch user information from registration_information.txt
+    const fetchData = async () => {
+      try {
+        const response = await fetch("URL_TO_FETCH_USER_INFO");
+        if (response.ok) {
+          const data = await response.json();
+          setUserInfo(data);
+        } else {
+          console.error("Failed to fetch user information");
+        }
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
+  };
+
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePicture(file);
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleEditConfirm = () => {
+    // Update user information in registration_information.txt
+    // Show confirmation popup
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="profile" style={{ backgroundColor: "#ffcccc" }}>
+      <div className="images">
+        <label htmlFor="profilePictureInput">
+          <div className="imageContainer">
+            <img
+              src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
+              alt=""
+              className={profilePicture ? "cover" : "placeholder"}
+            />
+            {!profilePicture && (
+              <div className="placeholderContent">
+                <CameraAlt fontSize="large" />
+              </div>
+            )}
+          </div>
+        </label>
+        <input
+          id="profilePictureInput"
+          type="file"
+          accept="image/*"
+          onChange={handleProfilePictureChange}
+          style={{ display: "none" }}
+        />
+      </div>
+      <div className="profileContainer">
+        {Object.keys(userInfo).map((key) => (
+          <div key={key} className="infoField">
+            <input
+              type="text"
+              name={key}
+              value={userInfo[key]}
+              onChange={handleInputChange}
+              readOnly={!isEditing}
+              style={{ backgroundColor: "white" }}
+            />
+            {isEditing && (
+              <Edit fontSize="small" onClick={handleEditConfirm} />
+            )}
+          </div>
+        ))}
+        <div className="buttonContainer">
+          {!isEditing ? (
+            <button onClick={handleEditClick}>Edit</button>
+          ) : (
+            <button onClick={handleEditConfirm}>Confirm</button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Profile;
+*/
+
+import { useState, useEffect } from "react";
+import "./profile.scss";
+import { CameraAlt, Edit } from "@mui/icons-material"; // Import camera and edit icons from MUI
+import { Link } from "react-router-dom";
+
+const Profile = () => {
+  const [profilePicture, setProfilePicture] = useState(null);
+  const [userInfo, setUserInfo] = useState({
+    userId: "",
+    username: "",
+    name: "",
+    email: "",
+    department: "",
+    registrationNo: "",
+    session: "",
+    hall: "",
+    password: "",
+  });
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    // Fetch user information from registration_information.txt
+    const fetchData = async () => {
+      try {
+        const response = await fetch("URL_TO_FETCH_USER_INFO");
+        if (response.ok) {
+          const data = await response.json();
+          setUserInfo(data);
+        } else {
+          console.error("Failed to fetch user information");
+        }
+      } catch (error) {
+        console.error("Error fetching user information:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo({
+      ...userInfo,
+      [name]: value,
+    });
+  };
+
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    setProfilePicture(file);
+  };
+
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleEditConfirm = () => {
+    // Update user information in registration_information.txt
+    // Show confirmation popup
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="profile" style={{ backgroundColor: "#ffcccc", height: "100vh", padding: "20px" }}>
+      <div className="images" style={{ marginBottom: "20px" }}>
+        <label htmlFor="profilePictureInput">
+          <div className="imageContainer">
+            <img
+              src={profilePicture ? URL.createObjectURL(profilePicture) : ""}
+              alt=""
+              className={profilePicture ? "cover" : "placeholder"}
+            />
+            {!profilePicture && (
+              <div className="placeholderContent">
+                <CameraAlt fontSize="large" />
+              </div>
+            )}
+          </div>
+        </label>
+        <input
+          id="profilePictureInput"
+          type="file"
+          accept="image/*"
+          onChange={handleProfilePictureChange}
+          style={{ display: "none" }}
+        />
+      </div>
+      <div className="profileContainer">
+        {Object.keys(userInfo).map((key, index) => (
+          <div key={key} className="infoField" style={{ marginBottom: "10px" }}>
+            <input
+              type="text"
+              name={key}
+              value={userInfo[key]}
+              onChange={handleInputChange}
+              readOnly={!isEditing}
+              style={{ backgroundColor: "white", marginRight: "10px" }}
+            />
+            {isEditing && index === 0 && (
+              <Edit fontSize="small" onClick={handleEditConfirm} />
+            )}
+          </div>
+        ))}
+        <div className="buttonContainer">
+          {!isEditing ? (
+            <button onClick={handleEditClick}>Edit</button>
+          ) : (
+            <button onClick={handleEditConfirm}>Confirm</button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Profile;
+
+
