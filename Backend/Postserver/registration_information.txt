@@ -1,0 +1,10 @@
+23,tania,maria,meherincse@gmail.com,IIT,789999999999999,2019-20,SM,458
+45,sna,sonia,flyingmokingjay@gmail.com,CSE,789999999999999,2019-20,SK,789
+45,sna,sonia,flyingmokingjay@gmail.com,CSE,789999999999999,2019-20,SK,789
+52,pew,prity,tina@gmail.com,Chemistry,789999999999999,2019-20,SM,123
+89,nafisa,nafisa anzum,nafisa@gmail.com,Pharmacy,2019018564,2019-20,SH,789
+90,raima,raima khan,raima@gmail.com,Pharmacy,2020789456,2020-21,SK,123
+52,mer,meherin,rai@gmail.com,IIT,2019018564,2019-20,SK,123
+100,pew,prity,prity@gmail.com,Chemistry,2019018564,2019-20,SM,123
+101,sam,samia,samia@gmail.com,Math,2019018564,2019-20,SK,123
+23,meheincse,Nur Jannat Meherin,mer@gmail.com,Pharmacy,789999999999999,,JN,151315

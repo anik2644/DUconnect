@@ -6,14 +6,14 @@ import Share from "../../components/share/Share"
 import "./home.scss"
 
 
-
+// <Stories />
 
 const Home = () => {
   const [posts,setPosts] = useState([])
 
   return (
     <div className="home">
-      <Stories />
+     
       <Share posts={posts} setPosts={setPosts}/>
       <Posts posts={posts} setPosts={setPosts}/>
     </div>

@@ -1,0 +1,6 @@
+anik,2024-05-13,8 pm,789456123,A+,CSE,2019-20,Fular Road
+nafisa,2024-05-12,9 am,741852963,O+,EEE,2020-21,Nilkhet
+meherin,2024-05-20,5 pm,4789652145,O-,SE,2021-22,Fular Road
+pew,2024-05-12,8 am,7458963,B-,EME,2020-21,Fular Road
+estona,2024-04-30,10 am,852963147,O-,SE,2020-21,Polashi
+raima,2024-05-05,9 am,789321456,AB+,EEE,2020-21,Nilkhet
