@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from fastapi import UploadFile, File
+
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 import pymongo
@@ -6,6 +8,10 @@ import asyncio
 from datetime import datetime
 from typing import List
 from bson import ObjectId  # Import ObjectId from bson module
+
+from minio import Minio
+from minio.error import S3Error
+from datetime import timedelta
 
 
 app = FastAPI()
@@ -62,6 +68,13 @@ app.add_middleware(
 )
 
 
+minio_client = Minio(
+        "localhost:9000",
+        access_key="RI0BNCMXTVSCYLCJ3K67",
+        secret_key="y22NN31zTQ2illxYInC19NcxMEjmDmS730PiI8HX",
+        secure=False
+    )
+
 # app.add_middleware(
 #    CORSMiddleware,
 #    allow_origins=["http://localhost:3000"],
@@ -114,7 +127,7 @@ def fetchpost() -> List[dict]:
         document['userId'] =int(document['userid'])
             # Add new fields
         document['profilePic'] = profilePic
-        document['img'] = img
+        # document['img'] = img
 
     # Delete the '_id' field
         if '_id' in document:
@@ -142,7 +155,7 @@ def save_post(post: Post)  -> List[dict]:
         "userid": post.userId,
       #   "profilePic": post.profilePic,
         "desc":post.desc,
-      #   "img":post.img
+         "img":post.img
     }
    # #print(myDoc)
    res = myCollection.insert_one(myDoc)
@@ -180,6 +193,59 @@ async def create_post(post: Post):
     # print("Received Post:", post.dict())  # Just for debugging purposes
     print("I am the king of the world!")
 
+    image = post.img
+
+    source_file = "C:/Users/anik1/Pictures/" + image
+    print(source_file)
+
+
+    current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] 
+
+    try:
+        # Upload the image to MinIo
+        bucket_name = "python-test-bucket"
+        destination_file = current_time+'.png'
+        # destination_file = post.img.split("/")[-1]  # Extract filename from img URL
+        
+
+        # Upload the image
+    # client.fput_object(
+    #     bucket_name, destination_file, source_file,
+    # )
+    # print(
+    #     source_file, "successfully uploaded as object",
+    #     destination_file, "to bucket", bucket_name,
+    # )
+     
+        
+        # Save the file to MinIO
+        minio_client.fput_object(
+            bucket_name, destination_file, source_file,
+            # length=image.file._length
+        )
+        print(
+          source_file, "successfully uploaded as object",
+          destination_file, "to bucket", bucket_name,
+        )
+
+        # Generate presigned URL for the uploaded image
+       
+
+        image_url = minio_client.presigned_get_object(bucket_name, destination_file, expires=timedelta(days=7))
+        print("Image URL:", image_url)
+
+        # You can now use image_url as needed, e.g., store it in the database
+        post.img = image_url
+
+        # Here you can save the post to your MongoDB collection or perform any other operations
+        documents = save_post(post)
+        return {"message": "User registered successfully", "documents": documents}
+    
+    except S3Error as exc:
+        print("Error occurred:", exc)
+        raise HTTPException(status_code=500, detail="Failed to upload image")
+
+
     # return {"message": "Post saved successfully"} 
    #  try:
    #      # Open the file in append mode and write the post data
@@ -189,8 +255,7 @@ async def create_post(post: Post):
    #  except Exception as e:
    #      raise HTTPException(status_code=500, detail=str(e))
     
-    documents = save_post(post)
-    return {"message": "User registered successfully", "documents": documents}
+
 
 
 
