@@ -14,7 +14,7 @@ app.add_middleware(
 )
 
 class LoginInfo(BaseModel):
-    email: str  # Change to email
+    email: str
     password: str
 
 @app.post("/login/")
@@ -28,6 +28,9 @@ async def login(info: LoginInfo):
         for line in lines:
             data = line.strip().split(',')
             if data[3] == info.email and data[8] == info.password:  # Use index 3 for email
+                # Save the login data to profile.txt
+                with open("profile.txt", "w") as profile_file:
+                    profile_file.write(','.join(data))
                 return {"message": "Login successful"}
         
         # If no match found, raise an exception
