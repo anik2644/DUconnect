@@ -42,6 +42,6 @@ async def store_register_info(info: BloodDonationInfo):
     except Exception as e:
         raise HTTPException(status_code=500, detail="Error")
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="localhost", port=8000)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="localhost", port=8000)

@@ -8,16 +8,15 @@
   .card {
     width: 50%;
     display: flex;
-    background-color: rgb(248, 240, 240);
+    background-color: white;
     border-radius: 10px;
     min-height: 600px;
     overflow: hidden;
-    opacity: 0.1;
 
     .left {
       flex: 1;
       background: linear-gradient(rgba(39, 11, 96, 0.5), rgba(39, 11, 96, 0.5)),
-        url("https://img.atlasobscura.com/bFumW_WVpQDxEr_Ho5qExRWh5jXaZ2UEGaqyrWD34kE/rt:fit/h:390/q:81/sm:1/scp:1/ar:1/aHR0cHM6Ly9hdGxh/cy1kZXYuczMuYW1h/em9uYXdzLmNvbS91/cGxvYWRzL3BsYWNl/X2ltYWdlcy9oamNp/Mm16eGNjYjdhYmNh/OWMzMTJmYjc0MzAw/Nl9DdXJ6b25fSGFs/bF8tX05vcnRoZXJu/X0ZhY2FkZV8tX1Vu/aXZlcnNpdHlfb2Zf/RGhha2FfLV9EaGFr/YV8yMDE1LTA1LTMx/XzE5OTIuSlBH.jpg?auto=compress&cs=tinysrgb&w=1600")
+        url("https://images.pexels.com/photos/3228727/pexels-photo-3228727.jpeg?auto=compress&cs=tinysrgb&w=1600")
           center;
       background-size: cover;
       padding: 50px;
@@ -30,14 +29,14 @@
         font-size: 100px;
         line-height: 100px;
       }
-
+      
       p {
       }
 
       span {
         font-size: 14px;
       }
-
+      
       button {
         width: 50%;
         padding: 10px;
@@ -60,18 +59,18 @@
       h1 {
       color: #555;
       }
-
+      
       form {
         display: flex;
         flex-direction: column;
         gap: 30px;
-
+        
         input {
         border: none;
         border-bottom: 1px solid lightgray;
         padding: 20px 10px;
         }
-
+        
         button {
           width: 50%;
           padding: 10px;

@@ -4,6 +4,7 @@
   align-items: center;
   height: 100vh;
   background-color: #e6e0e0;
+  position: relative; /* Ensure relative positioning for absolute positioning of the button */
 }
 
   .logo {
@@ -77,3 +78,20 @@ button[type='submit']:hover {
 .text-green-500 {
   color: #48bb78;
 }
+
+.blood-list-button {
+  position: absolute;
+  top: 10px; /* Adjust top position to move the button down */
+  left: 10px; /* Adjust left position to move the button right */
+  background-color: red; /* Make the button red */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Adjust padding as needed */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.blood-list-button:hover {
+  background-color: darkred; /* Change color on hover */
+}
+

@@ -7,7 +7,7 @@ const Posts = () => {
 
   useEffect(() => {
     // fetch("http://127.0.0.1:8000/GetPost/", {
-      fetch("http://127.0.0.1:8000/getpost/", {
+      fetch("http://127.0.0.1:8002/getpost/", {
       method: "GET", // Change method to GET
       headers: {
         "Content-Type": "application/json",

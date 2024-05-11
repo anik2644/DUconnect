@@ -1,0 +1,48 @@
+.blood-list-container {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .search-bar input {
+    padding: 8px 12px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .heading {
+    color: red;
+    margin-bottom: 10px;
+  }
+  
+  .blood-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .blood-table th,
+  .blood-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .blood-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .blood-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .blood-table tr:hover {
+    background-color: #f2f2f2;
+  }
+  

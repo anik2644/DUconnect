@@ -81,6 +81,6 @@ async def get_blood_info():
         raise HTTPException(status_code=500, detail="Error occurred while fetching information")
 
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="localhost", port=8080)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run(app, host="localhost", port=8080)

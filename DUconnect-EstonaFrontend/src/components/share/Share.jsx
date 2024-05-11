@@ -60,7 +60,7 @@ const Share = (props) => {
     // formData.append("image", selectedImage); // Append the file to the form data
   
 
-    fetch('http://127.0.0.1:8000/posts/', {
+    fetch('http://127.0.0.1:8002/posts/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
