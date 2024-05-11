@@ -32,6 +32,7 @@ UserCollection = myDb["allUser"] # table name
 
 
 
+loginCollection = myDb["loginInfo"] # table name
 
 
 # Enable CORS
@@ -112,6 +113,15 @@ def save_Reaction(userInfo: UserInfo) -> List[dict]:
          }
         res = UserCollection.insert_one(myDoc)
         documents_list.append(myDoc)
+
+        myDoclogin = {
+         "_id" : current_time,
+         "email": userInfo.email,
+         "password": userInfo.password
+           #   "img":post.img
+         }
+        
+        res = loginCollection.insert_one(myDoclogin)
    else:
         
         return []
