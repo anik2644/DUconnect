@@ -5,14 +5,17 @@ import "./profile.scss";
 
 const Profile = () => {
   const [image, setImage] = useState(null);
+  const [profilePhoto, setProfilePhoto] = useState('');
   const [profileData, setProfileData] = useState(null);
   const [editMode, setEditMode] = useState({});
   const [updateMessage, setUpdateMessage] = useState("");
   const [profileid, setProfileId] = useState("anik11556@gmail.com");
+  const [img_path, setImagepath]= useState("")
 
   useEffect(() => {
     fetchProfileData();
   }, []);
+
 
 
   const fetchProfileData = () => {
@@ -32,8 +35,11 @@ const Profile = () => {
       return response.json();
     })
     .then(data => {
-      console.log('Profile data:', data); // Print data to console
+      console.log('getting data:', data); // Print data to console
       setProfileData(data); // Set profile data
+
+      console.log('getting profile data:', data['profile_photo']);
+      setProfilePhoto(data['profile_photo'])
     })
     .catch(error => console.error('Error fetching profile data:', error));
   };
@@ -53,11 +59,16 @@ const Profile = () => {
 
 
 
-
-
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
+
+    if (file) {
+
+      const filePath = file.webkitRelativePath || file.name;
+      setImagepath(filePath);
+  }
+
     reader.onloadend = () => {
       setImage(reader.result);
     };
@@ -89,12 +100,31 @@ const Profile = () => {
   };
 
   const updateProfileOnServer = () => {
+
+
+    const profileDatabackend = {
+      userId: profileData.userId,
+      username: profileData.username,
+      name: profileData.name,
+      email: profileData.email,
+      department: profileData.department,
+      registrationNo: profileData.registrationNo,
+      session: profileData.session,
+      hall: profileData.hall,
+      password: profileData.password,
+      profile_photo: img_path
+
+  };
+
+  console.log("profileDatabackend");
+  console.log(profileDatabackend);
+
     fetch('http://localhost:8888/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(profileData),
+      body: JSON.stringify(profileDatabackend),
     })
     .then(response => response.json())
     .then(data => {
@@ -127,8 +157,13 @@ const Profile = () => {
             margin: '0 auto',
           }}
         >
-          {image ? (
+          {
+          
+          image ? (
             <img src={image} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          ) : 
+          profilePhoto !== '' ? (
+            <img src={profilePhoto} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           ) : (
             <div
               style={{

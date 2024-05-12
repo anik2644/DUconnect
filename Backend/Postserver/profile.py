@@ -142,7 +142,7 @@ def update_profile(profile_data):
 
         current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] 
 
-        myDoc["profile_photo"] = profile_data["profile_photo"]
+        # myDoc["profile_photo"] = profile_data["profile_photo"]
 
         try:
             # Upload the image to MinIo
@@ -161,7 +161,7 @@ def update_profile(profile_data):
     
             image_url = minio_client.presigned_get_object(bucket_name, destination_file, expires=timedelta(days=7))
             print("Image URL:", image_url)  
-            myDoc["profile_photo"] = profile_data["profile_photo"]      
+            myDoc["profile_photo"] = image_url     
  
  
  
