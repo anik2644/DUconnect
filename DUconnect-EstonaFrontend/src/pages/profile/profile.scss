@@ -1,125 +1,73 @@
 @import "../../style.scss";
+@import "../../style.scss";
 
-.profile {
-  @include themify($themes) {
-    background-color: themed("bgSoft");
+.profile-container {
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-    .images {
-      width: 100%;
-      height: 300px;
-      position: relative;
+.profile-image-container {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+}
 
-      .cover {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+.profile-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-      .profilePic {
-        width: 200px;
-        height: 200px;
-        border-radius: 50%;
-        object-fit: cover;
-        position: absolute;
-        left: 0;
-        right: 0;
-        margin: auto;
-        top: 200px;
-      }
-    }
-    .profileContainer {
-      padding: 20px 70px;
+.upload-input {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Center the text horizontally */
+  align-items: center; /* Center the text vertically */
+  padding: 10px; /* Add padding */
+}
 
-      @include mobile{
-        padding: 10px;
-      }
+.profile-table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 2px solid black;
+  width: 100%;
+}
 
-      @include tablet{
-        padding: 20px;
-      }
+.profile-table th,
+.profile-table td {
+  border: 2px solid black;
+  padding: 10px;
+}
 
-      .uInfo {
-        height: 180px;
-        -webkit-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-        -moz-box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-        box-shadow: 0px 0px 25px -10px rgba(0, 0, 0, 0.38);
-        border-radius: 20px;
-        background-color: themed("bg");
-        color: themed("textColor");
-        padding: 50px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
+.edit-icons {
+  cursor: pointer;
+  margin-right: 5px;
+}
 
-        @include mobile{
-          flex-direction: column;
-          height: 30vh;
-          padding: 20px;
-          margin-top: 100px;
-        }
+.edit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px; /* Increased margin */
+}
 
-        .left {
-          flex: 1;
-          display: flex;
-          gap: 10px;
+.edit-button-inner {
+  padding: 15px 30px; /* Increased padding */
+  font-size: 4em; /* Increased font size relative to the parent */
+  background-color: #acc9e9; /* Nice blue color */
+  color: #18131d; /* Dark text color */
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
 
-          @include tablet{
-            flex-wrap: wrap;
-          }
-
-          a{
-            color: themed("textColorSoft");
-          }
-        }
-
-        .center {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 10px;
-
-          span {
-            font-size: 30px;
-            font-weight: 500;
-          }
-
-          .info {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-
-            .item {
-              display: flex;
-              align-items: center;
-              gap: 5px;
-              color: themed("textColorSoft");
-
-              span {
-                font-size: 12px;
-              }
-            }
-          }
-          button {
-            border: none;
-            background-color: #5271ff;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-          }
-        }
-
-        .right {
-          flex: 1;
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-          gap: 10px;
-        }
-      }
-    }
-  }
+.edit-button-inner:hover {
+  background-color: #5294da; /* Darker blue on hover */
+}
+.update-message {
+  text-align: center;
+  margin-top: 10px;
 }
