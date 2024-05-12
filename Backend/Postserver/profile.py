@@ -13,6 +13,10 @@ from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 
 
+from minio import Minio
+from minio.error import S3Error
+from datetime import timedelta
+
 
 app = FastAPI()
 
@@ -67,6 +71,15 @@ def fetchUser() -> List[dict]:
    return documents_list      
 
 
+minio_client = Minio(
+        "localhost:9000",
+        access_key="RI0BNCMXTVSCYLCJ3K67",
+        secret_key="y22NN31zTQ2illxYInC19NcxMEjmDmS730PiI8HX",
+        secure=False
+    )
+
+
+
 
 # Allowing CORS for frontend to access the API
 app.add_middleware(
@@ -118,6 +131,44 @@ def update_profile(profile_data):
         "hall": profile_data.get("hall"),
         "password": profile_data.get("password")
     }
+
+    if "profile_photo" in profile_data:
+        print("I am the king of the world!")
+    
+        image =  profile_data["profile_photo"]
+
+        source_file = "C:/Users/anik1/Pictures/" + image
+        print(source_file)
+
+        current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] 
+
+        myDoc["profile_photo"] = profile_data["profile_photo"]
+
+        try:
+            # Upload the image to MinIo
+            bucket_name = "python-test-bucket"
+            destination_file = current_time+'.png'
+    
+            minio_client.fput_object(
+                bucket_name, destination_file, source_file,
+                # length=image.file._length
+            )
+    
+            print(
+              source_file, "successfully uploaded as object",
+              destination_file, "to bucket", bucket_name,
+            )
+    
+            image_url = minio_client.presigned_get_object(bucket_name, destination_file, expires=timedelta(days=7))
+            print("Image URL:", image_url)  
+            myDoc["profile_photo"] = profile_data["profile_photo"]      
+ 
+ 
+ 
+        except S3Error as exc:
+           print("Error occurred:", exc)
+           raise HTTPException(status_code=500, detail="Failed to upload image")
+  
 
     # Update the profile information based on the email id
     res = UserCollection.update_one({"email": email}, {"$set": myDoc})
