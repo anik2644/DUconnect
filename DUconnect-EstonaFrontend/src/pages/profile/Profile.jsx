@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera, faEdit, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 import "./profile.scss";
-const [img_path, setImagepath]= useState("")
 
 const Profile = () => {
   const [image, setImage] = useState(null);
@@ -54,18 +53,11 @@ const Profile = () => {
 
 
 
+
+
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
-    if (file) {
-
-      const filePath = file.webkitRelativePath || file.name;
-      setImagepath(filePath);
-  }
-
-
-
-
     reader.onloadend = () => {
       setImage(reader.result);
     };
@@ -97,28 +89,12 @@ const Profile = () => {
   };
 
   const updateProfileOnServer = () => {
-
-
-    const profileDatabackend = {
-      userId: profileData.userId,
-      username: profileData.username,
-      name: profileData.name,
-      email: profileData.email,
-      department: profileData.department,
-      registrationNo: profileData.registrationNo,
-      session: profileData.session,
-      hall: profileData.hall,
-      password: profileData.password,
-      profile_photo: img_path
-
-  };
-  console.log(profileDatabackend);
     fetch('http://localhost:8888/profile', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(profileDatabackend),
+      body: JSON.stringify(profileData),
     })
     .then(response => response.json())
     .then(data => {
