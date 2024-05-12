@@ -7,6 +7,7 @@ const EventPage = () => {
     const [showModal, setShowModal] = useState(false);
     const [newEvent, setNewEvent] = useState({ title: '', imageUrl: '', description: '', date: '' });
     const [errorMessage, setErrorMessage] = useState('');
+    const [img_path, setImagepath]= useState("")
 
     // Default list of events using the default list of articles
     const defaultEvents = [
@@ -18,19 +19,89 @@ const EventPage = () => {
 
     // Set default events on component mount
     useState(() => {
-        setEvents(defaultEvents);
+
+    fetch("http://127.0.0.1:8003/get-events/", {
+        method: "GET", // Change method to GET
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Failed to fetch posts");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log("mhd mahmud anik");
+           console.log(JSON.stringify(data, null, 2));
+           setEvents(data);
+        
+            // Print response from the server
+          // Optionally, you can perform any actions with the fetched posts data here.
+        })
+        .catch((error) => {
+          console.error("Error fetching posts:", error);
+        });
+
+
+
+        // setEvents(defaultEvents);
     }, []);
 
-    const handleAddEvent = () => {
-        if (!newEvent.title.trim() || !newEvent.imageUrl.trim() || !newEvent.description.trim() || !newEvent.date.trim()) {
-            setErrorMessage('Please provide title, image URL, description, and date.');
-            return;
+    const handleAddEvent = async (e) => {
+
+        e.preventDefault();
+        // if (!newEvent.title.trim() || !newEvent.imageUrl.trim() || !newEvent.description.trim() || !newEvent.date.trim()) {
+        //     setErrorMessage('Please provide title, image URL, description, and date.');
+        //     return;
+        // }
+
+
+
+
+
+
+        const eventForBackend = {
+            name: newEvent.title.toString(),
+            location: 'University of Dhaka',//newEvent.location.toString(),
+            time: newEvent.date.toString(),
+            title: newEvent.title.toString(),
+            description: newEvent.description.toString(),
+            media: img_path,//newEvent.media.toString()
+        };
+
+        console.log('Event for backend:', eventForBackend);
+
+        
+        try {
+            const response = await fetch('http://localhost:8003/create-event/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(eventForBackend)  // Send the newEvent object as JSON
+            });
+    
+            if (response.ok) {
+
+                const eventData = await response.json(); // Parse response data as JSON
+                console.log("Events:", eventData.documents); // P
+                alert('Event created successfully');
+            } else {
+                const errorData = await response.json();
+                alert(`Event creation failed: ${errorData.detail}`);
+            }
+        } catch (error) {
+            console.error('Error occurred:', error);
         }
 
-        const newId = events.length + 1;
-        setEvents([...events, { id: newId, ...newEvent }]);
-        setShowModal(false);
-        setNewEvent({ title: '', imageUrl: '', description: '', date: '' });
+          
+        // const newId = events.length + 1;
+        // setEvents([...events, { id: newId, ...newEvent }]);
+        //  setShowModal(false);
+        // setNewEvent({ title: '', imageUrl: '', description: '', date: '' });
         setErrorMessage('');
     };
 
@@ -43,7 +114,17 @@ const EventPage = () => {
         const file = e.target.files[0];
         const reader = new FileReader();
 
+        if (file) {
+
+            const filePath = file.webkitRelativePath || file.name;
+            setImagepath(filePath);
+        }
+
         reader.onloadend = () => {
+
+
+
+
             setNewEvent({ ...newEvent, imageUrl: reader.result });
         };
 
@@ -83,7 +164,8 @@ const EventPage = () => {
                     <div className="event-list">
                         {events.map(event => (
                             <div key={event.id} className="event-item">
-                                <div className="event-image" style={{ backgroundImage: `url(${event.imageUrl})` }}></div>
+                                {/* <img src={event.imageUrl} alt="" /> */}
+                                <div className="event-image" style={{ backgroundImage: `url(${event.media})` }}></div>
                                 <div className="event-content">
                                     <h3>{event.title}</h3>
                                     <p>{event.description}</p>

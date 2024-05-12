@@ -73,7 +73,7 @@ def fetchBlood() -> List[dict]:
 def saveBlood(bloodEntity: BloodDonationInfo) -> str:
    
     print(":habijabi")
-    documents_list = fetchBlood()       
+    # documents_list = fetchBlood()       
 
 
     current_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3] 
