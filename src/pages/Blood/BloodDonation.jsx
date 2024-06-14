@@ -2,7 +2,6 @@ import { useState } from 'react';
 import './BloodDonation.scss'; // Styles for BloodDonation page
 
 const BloodDonation = () => {
-    // State variables for form fields
     const [name, setName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [address, setAddress] = useState('');
@@ -14,27 +13,26 @@ const BloodDonation = () => {
     const [warning, setWarning] = useState('');
     const [message, setMessage] = useState('');
 
-    // Function to handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Process form data here (e.g., submit to backend)
         console.log('Form submitted:', { name, dateOfBirth, address, registrationNumber, bloodGroup, department, session, area });
     };
 
     return (
         <div className="blood-donation-page">
-            {/* Logo on the left */}
-            <div className="logo">
-                <img src="https://i.ibb.co/0Kcyhph/blood-donation.jpg" alt="Blood Donation Logo" />
-            </div>
-            {/* Form on the right */}
             <div className="donation-form">
-                <h2>Blood Donation Form</h2>
+                <h2>Medical Blood Donation Consent Form</h2>
+                <img src="https://i.ibb.co/0Kcyhph/blood-donation.jpg" alt="Blood Donation Logo" className="logo"/>
                 <form onSubmit={handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} required />
-                    </label>
+                    <div className="form-group">
+                        <label>
+                            Name:
+                            <div className="name-inputs">
+                                <input type="text" placeholder="First" value={name.split(' ')[0]} onChange={(e) => setName(e.target.value)} required />
+                                <input type="text" placeholder="Last" value={name.split(' ')[1] || ''} onChange={(e) => setName(name.split(' ')[0] + ' ' + e.target.value)} required />
+                            </div>
+                        </label>
+                    </div>
                     <label>
                         Date of Birth:
                         <input type="date" value={dateOfBirth} onChange={(e) => setDateOfBirth(e.target.value)} required />
@@ -94,9 +92,9 @@ const BloodDonation = () => {
                             <option value="Bokshibazar">Bokshibazar</option>
                         </select>
                     </label>
-                    {warning && <p className="text-red-500">{warning}</p>}
-                    {message && <p className="text-green-500">{message}</p>}
-                    <button type="submit" className="bg-purple-600 text-white rounded-md p-3 hover:bg-purple-800">
+                    {warning && <p className="warning-text">{warning}</p>}
+                    {message && <p className="message-text">{message}</p>}
+                    <button type="submit" className="submit-button">
                         Submit
                     </button>
                 </form>

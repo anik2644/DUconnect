@@ -1,11 +1,14 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import "./share.scss";
+import { FaPhotoVideo, FaTags, FaMapMarkerAlt } from "react-icons/fa";
 
 const Share = (props) => {
   const { currentUser } = useContext(AuthContext);
   const [text, setText] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
+  const [taggedFriends, setTaggedFriends] = useState("");
+  const [location, setLocation] = useState("");
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -17,13 +20,14 @@ const Share = (props) => {
       reader.readAsDataURL(file);
     }
   };
+
   const handleKeyDown = (event) => {
     if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
       handleShare();
     }
   };
+
   const handleShare = () => {
-    // Create a new shared post object
     const newPost = [{
       id: Math.random(),
       name: currentUser.name,
@@ -31,6 +35,8 @@ const Share = (props) => {
       profilePic: currentUser.profilePic,
       desc: text,
       img: selectedImage,
+      taggedFriends: taggedFriends,
+      location: location,
       likes: 0,
       comments: [],
     }];
@@ -40,6 +46,8 @@ const Share = (props) => {
     // Clear input fields after sharing
     setText("");
     setSelectedImage(null);
+    setTaggedFriends("");
+    setLocation("");
   };
 
   return (
@@ -53,7 +61,7 @@ const Share = (props) => {
             className="post-input"
             value={text}
             onChange={(e) => setText(e.target.value)}
-            onKeyDown={handleKeyDown} // Add onKeyDown event listener
+            onKeyDown={handleKeyDown}
           />
         </div>
         {selectedImage && (
@@ -61,16 +69,11 @@ const Share = (props) => {
             <img src={selectedImage} alt="Selected" className="selected-image" />
           </div>
         )}
-        <input
-          type="file"
-          id="file"
-          style={{ display: "none" }}
-          onChange={handleImageChange}
-        />
         <hr />
         <div className="bottom">
-          <div className="left">
-            <label htmlFor="file" className="file-label">
+          <div className="options">
+            <label htmlFor="file" className="option">
+              <FaPhotoVideo className="icon" />
               <span>Add Photo/Video</span>
               <input
                 type="file"
@@ -79,12 +82,28 @@ const Share = (props) => {
                 onChange={handleImageChange}
               />
             </label>
+            <div className="option">
+              <FaTags className="icon" />
+              <input
+                type="text"
+                placeholder="Tag Friends"
+                value={taggedFriends}
+                onChange={(e) => setTaggedFriends(e.target.value)}
+              />
+            </div>
+            <div className="option">
+              <FaMapMarkerAlt className="icon" />
+              <input
+                type="text"
+                placeholder="Add Location"
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
           </div>
-          <div className="right">
-            <button className="share-button" onClick={handleShare}>
-              Share
-            </button>
-          </div>
+          <button className="share-button" onClick={handleShare}>
+            Share
+          </button>
         </div>
       </div>
     </div>

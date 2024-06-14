@@ -2,7 +2,7 @@ import "./navbar.scss";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
+//import GridViewOutlinedIcon from "@mui/icons-material/GridViewOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
@@ -13,7 +13,7 @@ import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
 
 const Navbar = () => {
-  const { toggle, darkMode } = useContext(DarkModeContext);
+  const {toggle ,darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
 
   const handleSearchClick = () => {
@@ -42,7 +42,7 @@ const Navbar = () => {
         <Link to="/profile">
           <PersonOutlinedIcon />
         </Link>
-        <a href="https://mail.google.com/">
+        <a  href ="https://mail.google.com/">
           <EmailOutlinedIcon />
         </a>
         <Link to="/notification">

@@ -8,6 +8,7 @@ import { DarkModeContext } from '../../context/darkModeContext';
 
 const LeftBar = () => {
   const { currentUser } = useContext(AuthContext);
+  const { toggle, darkMode } = useContext(DarkModeContext);
 
   return (
 
