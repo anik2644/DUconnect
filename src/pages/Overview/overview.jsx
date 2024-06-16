@@ -47,7 +47,7 @@ const UniversityDhakaOverview = () => {
           </div>
           <div className="photos">
             <img src="https://i.ibb.co/Ldd5cGL/cz.jpg" alt="University of Dhaka Main Building" />
-            <img src="https://i.ibb.co/prvz6Yc/fdg.jpg" alt="University of Dhaka Campus View" />
+            <img src="https://i.ibb.co/WBTWVQT/16871043848757.jpg" alt="University of Dhaka Campus View" />
             <img src="https://i.ibb.co/GJHqRQM/tsc.jpg" alt="University of Dhaka TSC" />
             <img src="https://i.ibb.co/rxhHZhQ/images.jpg" alt="University of Dhaka Another View" />
           </div>
