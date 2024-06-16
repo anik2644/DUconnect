@@ -84,7 +84,7 @@ const Profile = () => {
       </div>
       <div className="profile-info">
         <div className="profile-contact">
-          <button className="contact-button">Send message</button>
+
           <button className="contact-button">Contacts</button>
         </div>
         <table className="profile-table">

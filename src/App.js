@@ -31,6 +31,7 @@ import posts from './components/posts/Posts';
 import Anik from './pages/anik/anik';
 import ForgetPasswordPage from './pages/forgetpassword/ForgetPasswordPage';
 import ResetPasswordPage from './pages/resetpassword/reset';
+import UniversityDhakaOverview from './pages/Overview/overview';
 
 
 
@@ -139,6 +140,10 @@ function App() {
     {
       path: "/resetpassword",
       element: <ResetPasswordPage/>,
+    },
+    {
+      path: "/overview",
+      element: <UniversityDhakaOverview/>,
     },
   ]);
 
