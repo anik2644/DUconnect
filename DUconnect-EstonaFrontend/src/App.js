@@ -33,6 +33,10 @@ import ForgetPasswordPage from './pages/forgetpassword/ForgetPasswordPage';
 import ResetPasswordPage from './pages/resetpassword/reset';
 import UniversityDhakaOverview from './pages/Overview/overview';
 import EventDetail from './pages/eventdetail/eventdetail';
+import BloodList from './pages/Blood/BloodList';
+
+
+
 
 
 
@@ -142,6 +146,12 @@ function App() {
       path: "/resetpassword",
       element: <ResetPasswordPage/>,
     },
+    {
+      path: "/blood-list",
+      element: <BloodList/>,
+    },
+    
+  
     {
       path: "/overview",
       element: <UniversityDhakaOverview/>,
