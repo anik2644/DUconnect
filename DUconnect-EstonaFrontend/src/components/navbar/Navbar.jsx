@@ -1,4 +1,5 @@
 import "./navbar.scss";
+import { useState, useEffect } from "react";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
@@ -15,6 +16,48 @@ import { AuthContext } from "../../context/authContext";
 const Navbar = () => {
   const {toggle ,darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
+  const [profilePhoto, setProfilePhoto] = useState("");
+  const [userName, setuserName] = useState("");
+  const [profileid, setProfileId] = useState("anik11556@gmail.com");
+
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
+
+
+  const fetchProfileData = () => {
+    console.log(profileid);
+
+    fetch(`http://localhost:8888/profile?email=${profileid}`, {
+      method: "GET", // Change method to GET
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(profileid)
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("getting data:", data); // Print data to console
+        // Delete the 'profile_photo' field from the data
+        const { profile_photo,username, ...profileDataWithoutPhoto } = data;
+
+        // Set profile data without profile_photo
+        // setProfileData(profileDataWithoutPhoto);
+
+        // Set profile photo separately
+        console.log("getting profile data:", profile_photo);
+        setuserName(username)
+        setProfilePhoto(profile_photo);
+      })
+      .catch((error) => console.error("Error fetching profile data:", error));
+  };
+
+
 
   const handleSearchClick = () => {
     // Handle search functionality
@@ -49,8 +92,8 @@ const Navbar = () => {
           <NotificationsOutlinedIcon />
         </Link>
         <div className="user">
-          <img src={currentUser.profilePic} alt="" />
-          <span>{currentUser.name}</span>
+          <img src={profilePhoto} alt="" />
+          <span>{userName}</span>
         </div>
       </div>
     </div>

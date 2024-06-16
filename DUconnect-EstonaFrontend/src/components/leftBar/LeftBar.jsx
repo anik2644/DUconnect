@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBell, faCog, faUser, faScroll, faCalendarAlt, faTint, faNewspaper, faDollarSign, faGraduationCap, faVideo } from '@fortawesome/free-solid-svg-icons'; // Import necessary icons
@@ -6,9 +7,51 @@ import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
 import { DarkModeContext } from '../../context/darkModeContext';
 
+
 const LeftBar = () => {
   const { currentUser } = useContext(AuthContext);
   const { toggle, darkMode } = useContext(DarkModeContext);
+  const [profilePhoto, setProfilePhoto] = useState("");
+  const [userName, setuserName] = useState("");
+  const [profileid, setProfileId] = useState("anik11556@gmail.com");
+
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
+
+
+  const fetchProfileData = () => {
+    console.log(profileid);
+
+    fetch(`http://localhost:8888/profile?email=${profileid}`, {
+      method: "GET", // Change method to GET
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(profileid)
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("getting data:", data); // Print data to console
+        // Delete the 'profile_photo' field from the data
+        const { profile_photo,username, ...profileDataWithoutPhoto } = data;
+
+        // Set profile data without profile_photo
+        // setProfileData(profileDataWithoutPhoto);
+
+        // Set profile photo separately
+        console.log("getting profile data:", profile_photo);
+        setuserName(username)
+        setProfilePhoto(profile_photo);
+      })
+      .catch((error) => console.error("Error fetching profile data:", error));
+  };
+
 
   return (
 
@@ -16,8 +59,8 @@ const LeftBar = () => {
       <div className="container">
         <div className="menu">
           <div className="user">
-            <img src={currentUser.profilePic} alt="" />
-            <span>{currentUser.name}</span>
+            <img src={profilePhoto} alt="" />
+            <span>{userName}</span>
           </div>
           {/* Link to Home page */}
           <Link to="/" className="item">

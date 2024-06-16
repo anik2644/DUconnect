@@ -86,6 +86,7 @@ def CheckLogin(info: LoginInfo) -> List[dict]:
 async def login(info: LoginInfo):
     try:
         print("i am here")
+        # return {"message": "Login successful"}
         login_result = CheckLogin(info)
         if login_result[0]['isMatched']:
             return {"message": "Login successful"}

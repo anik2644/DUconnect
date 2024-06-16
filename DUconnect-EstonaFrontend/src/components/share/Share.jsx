@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { AuthContext } from "../../context/authContext";
 import "./share.scss";
 import { FaPhotoVideo, FaTags, FaMapMarkerAlt } from "react-icons/fa";
@@ -9,10 +9,61 @@ const Share = (props) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [taggedFriends, setTaggedFriends] = useState("");
   const [location, setLocation] = useState("");
+  const [img_path, setImagepath]= useState("")
+  const [profilePhoto, setProfilePhoto] = useState("");
+  const [userName, setuserName] = useState("");
+  const [profileid, setProfileId] = useState("anik11556@gmail.com");
+
+  useEffect(() => {
+    fetchProfileData();
+  }, []);
+
+
+  const fetchProfileData = () => {
+    console.log(profileid);
+
+    fetch(`http://localhost:8888/profile?email=${profileid}`, {
+      method: "GET", // Change method to GET
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // body: JSON.stringify(profileid)
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("getting data:", data); // Print data to console
+        // Delete the 'profile_photo' field from the data
+        const { profile_photo,username, ...profileDataWithoutPhoto } = data;
+
+        // Set profile data without profile_photo
+        // setProfileData(profileDataWithoutPhoto);
+
+        // Set profile photo separately
+        console.log("getting profile data:", profile_photo);
+        setuserName(username)
+        setProfilePhoto(profile_photo);
+      })
+      .catch((error) => console.error("Error fetching profile data:", error));
+  };
+
+
+
+
+
+
+
+
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {
+      const filePath = file.webkitRelativePath || file.name;
+      setImagepath(filePath);
       const reader = new FileReader();
       reader.onload = (e) => {
         setSelectedImage(e.target.result);
@@ -28,6 +79,48 @@ const Share = (props) => {
   };
 
   const handleShare = () => {
+
+
+    const postforbackend = {
+      name: currentUser.name.toString(),
+      userId: currentUser.id.toString(),
+      profilePic: currentUser.profilePic.toString(),
+      desc: text.toString(),
+      img: img_path,
+      // likes: (0).toString(),
+      
+    };
+
+
+    fetch('http://127.0.0.1:8002/posts/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(postforbackend),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Failed to save post');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log(JSON.stringify(data, null, 2)); // Print response from the server
+      // Message from the server
+      // Optionally, you can perform any actions after successfully saving the post.
+    })
+    .catch(error => {
+      console.error('Error saving post:', error);
+    });
+
+    // id: Date.now().toString(),
+
+    console.log("time",Date.now().toString())
+
+
+
+
     const newPost = [{
       id: Math.random(),
       name: currentUser.name,
@@ -54,7 +147,7 @@ const Share = (props) => {
     <div className="share">
       <div className="container">
         <div className="top">
-          <img src={currentUser.profilePic} alt="Profile" className="profile-pic" />
+          <img src={profilePhoto} alt="Profile" className="profile-pic" />
           <input
             type="text"
             placeholder={`What's on your mind, ${currentUser.name}?`}

@@ -50,26 +50,147 @@ const Register = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const response = await fetch('http://localhost:8000/store_register_info/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userId: formData.userId,
+          username: formData.username,
+          name: formData.name,
+          email: formData.email,
+          department: formData.department,
+          registrationNo: formData.registrationNo,
+          session: formData.session,
+          hall: formData.hall,
+          password: formData.password
+        }),
+      }) .then(response => {
+        if (!response.ok) {
+          
+          window.alert("Email Already exists. Please choose a different email.");
+          // window.alert("Server Failed");
+          throw new Error('Failed to save post');
 
-    // Check if any field is empty
-    const emptyFields = Object.entries(formData).some(([key, value]) => {
-      if (value === "") {
-        setFieldErrors({
-          ...fieldErrors,
-          [key]: "Please fill in this field.",
-        });
-        return true;
-      }
-      return false;
-    });
+        }
 
-   if (!emptyFields) {
-      // Your logic to handle form submission goes here
-      window.alert("Registration Successful!");
+        // if (response.status == 100) {
+        //   window.alert("Email Already exists. Please choose a different email.");
+        //   throw new Error('Email Already exists');
+        // }
+        return response.json();
+      })
+      .then(data => {
+
+        console.log(JSON.stringify(data, null, 2)); // Print response from the server
+        window.alert("Registration Successful!");
+      //  if(response.status != 200)
+      //   {
+      //     console.log(JSON.stringify(data, null, 2)); // Print response from the server
+      //     window.alert("Registration Successful!");
+      //   }
+        // Reset form data if needed
+        // setFormData({
+        //   userId: "",
+        //   username: "",
+        //   name: "",
+        //   email: "",
+        //   department: "",
+        //   registrationNo: "",
+        //   session: "",
+        //   hall: "",
+        //   password: "",
+        // });
+      })
+      .catch(error => {
+        console.error('Error saving post:', error);
+      });
+
+
+
+
+      // if (response.ok) {
+      //   window.alert("Registration Successful!");
+
+
+
+
+
+      //   setFormData({ // Reset form data
+      //     userId: "",
+      //     username: "",
+      //     name: "",
+      //     email: "",
+      //     department: "",
+      //     registrationNo: "",
+      //     session: "",
+      //     hall: "",
+      //     password: "",
+      //   });
+      // } else {
+      //   const data = await response.json(); // Parse error response
+      //   window.alert(data.detail); // Display error message from backend
+      //   // setFormData({ // Reset form data
+      //   //   userId: "",
+      //   //   username: "",
+      //   //   name: "",
+      //   //   email: "",
+      //   //   department: "",
+      //   //   registrationNo: "",
+      //   //   session: "",
+      //   //   hall: "",
+      //   //   password: "",
+      //   // });
+      // }
+
+
+    } catch (error) {
+      // window.alert("Error!");
+      // setFormData({ // Reset form data
+      //   userId: "",
+      //   username: "",
+      //   name: "",
+      //   email: "",
+      //   department: "",
+      //   registrationNo: "",
+      //   session: "",
+      //   hall: "",
+      //   password: "",
+      // });
     }
+    // setTimeout(() => window.alert(""), 300); // Clear message after 1 second
   };
+  
+
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   // Check if any field is empty
+  //   const emptyFields = Object.entries(formData).some(([key, value]) => {
+  //     if (value === "") {
+  //       setFieldErrors({
+  //         ...fieldErrors,
+  //         [key]: "Please fill in this field.",
+  //       });
+  //       return true;
+  //     }
+  //     return false;
+  //   });
+
+  //  if (!emptyFields) {
+  //     // Your logic to handle form submission goes here
+  //     window.alert("Registration Successful!");
+  //   }
+
+
+
+
+  // };
 
   return (
     <div className="register">
