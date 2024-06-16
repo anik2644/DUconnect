@@ -73,7 +73,7 @@ const EventPage = () => {
                             <h2>DU Amra-Band Show</h2>
                             <p>As anticipation builds for their upcoming performance on Saturday, fans eagerly await the chance to experience the magic of DU Amra Band live. Whether it's their soul-stirring vocals, intricate instrumental solos, or infectious beats, attendees can expect an unforgettable evening filled with music, laughter, and memories to cherish.</p>
                             <p>Date:24-05-2024</p>
-                            <button className="book-event-btn">Book Now</button>
+
                         </div>
                     </div>
                 </section>
@@ -88,7 +88,7 @@ const EventPage = () => {
                                     <h3>{event.title}</h3>
                                     <p>{event.description}</p>
                                     <button className="read-more-btn">
-                                        <Link to={`/event/${event.id}`} className="read-more-link">Read More</Link>
+                                        <Link to={`/eventdetail`} className="read-more-link">Details</Link>
                                     </button>
                                     <button className="delete-event-btn" onClick={() => handleDeleteEvent(event.id)}>Delete</button>
                                 </div>

@@ -1,5 +1,6 @@
 .article-page {
     padding: 20px;
+   background-color: hsl(0, 0%, 99%);
 }
 
 .article-header {
@@ -12,7 +13,7 @@
 .article-title {
     font-size: 28px;
     font-weight: bold;
-    color: #932929;
+    color: #000000;
     margin: 0;
 }
 
@@ -74,14 +75,14 @@
 }
 
 .read-more-link {
-    color: #047cfc;
+    color: #277920;
     text-decoration: none;
     font-weight: bold;
     margin-right: 10px;
 }
 
 .delete-article-btn {
-    background-color: #ff6347;
+    background-color: #f50808;
     color: #fff;
     border: none;
     padding: 8px 15px;
@@ -99,10 +100,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: #fff;
+    background-color: #f3e7e7;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(160, 83, 83, 0.1);
     z-index: 1000;
     width: 400px;
     max-width: 90%;

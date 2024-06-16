@@ -66,21 +66,21 @@ const LeftBar = () => {
         </div>
         <hr />
         <div className="menu">
-          <span>Others</span>
+
           {/* Link to Fundraiser page */}
           <Link to="/fundraiser" className="item">
-            <FontAwesomeIcon icon={faDollarSign} />
-            <span>Fundraiser</span>
+
+
           </Link>
           {/* Link to Tutorials page */}
           <Link to="/tutorials" className="item">
-            <FontAwesomeIcon icon={faGraduationCap} />
-            <span>Tutorials</span>
+
+
           </Link>
           {/* Link to Courses page */}
           <Link to="/courses" className="item">
-            <FontAwesomeIcon icon={faVideo} />
-            <span>Courses</span>
+
+
           </Link>
         </div>
       </div>

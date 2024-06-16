@@ -78,14 +78,13 @@ const Profile = () => {
         <h1>{profileData.name}</h1>
         <h2>{profileData.occupation}</h2>
         <div className="profile-rating">
-          <span className="rating">{profileData.rating}</span>
-          <span className="stars">★ ★ ★ ★ ★</span>
+
         </div>
       </div>
       <div className="profile-info">
         <div className="profile-contact">
 
-          <button className="contact-button">Contacts</button>
+
         </div>
         <table className="profile-table">
           <tbody>

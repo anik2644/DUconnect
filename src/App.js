@@ -32,6 +32,7 @@ import Anik from './pages/anik/anik';
 import ForgetPasswordPage from './pages/forgetpassword/ForgetPasswordPage';
 import ResetPasswordPage from './pages/resetpassword/reset';
 import UniversityDhakaOverview from './pages/Overview/overview';
+import EventDetail from './pages/eventdetail/eventdetail';
 
 
 
@@ -144,6 +145,10 @@ function App() {
     {
       path: "/overview",
       element: <UniversityDhakaOverview/>,
+    },
+    {
+      path: "/eventdetail",
+      element: <EventDetail/>,
     },
   ]);
 
