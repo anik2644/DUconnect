@@ -1,0 +1,140 @@
+.notification-page {
+  padding: 20px;
+
+  .notification-title {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .notification-list {
+    .notification-item {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 10px;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: #ececec;
+      }
+
+      &.active {
+        background: #e0e0ff;
+        border-color: #6610f2;
+      }
+
+      .notification-icon {
+        margin-right: 20px;
+        font-size: 24px;
+        color: #333;
+      }
+
+      .notification-content {
+        .notification-heading {
+          color: #333;
+          font-size: 18px;
+          margin-bottom: 5px;
+        }
+
+        .notification-description {
+          color: #666;
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+
+        .notification-time {
+          color: #999;
+          font-size: 14px;
+        }
+      }
+
+      &.new-message .notification-icon {
+        color: #007bff;
+      }
+
+      &.urgent-alert .notification-icon {
+        color: #dc3545;
+      }
+
+      &.new-follower .notification-icon {
+        color: #28a745;
+      }
+
+      &.event-reminder .notification-icon {
+        color: #17a2b8;
+      }
+
+      &.new-comment .notification-icon {
+        color: #ffc107;
+      }
+
+      &.promotion .notification-icon {
+        color: #6610f2;
+      }
+    }
+  }
+
+  .notification-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+
+    .modal-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+      .modal-close {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      .modal-icon {
+        font-size: 40px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 10px;
+
+        strong {
+          color: #333;
+        }
+      }
+
+      span {
+        font-size: 14px;
+        color: #999;
+      }
+    }
+  }
+}
