@@ -1,35 +1,61 @@
-// termsAndConditionsPage.scss
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
 .terms-and-conditions-page {
-  background-color: #f9f9f9;
-  padding: 40px 0;
+  background-color: #f0f4f8;
+  padding: 60px 20px;
+  font-family: 'Open Sans', sans-serif;
 
   .container {
-    max-width: 800px;
+    max-width: 900px;
     margin: 0 auto;
+    background: #fff;
+    padding: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
   }
 
   .page-title {
-    color: #333;
-    font-size: 32px;
+    color: #007bff;
+    font-size: 36px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
   }
 
   .content {
     .section {
+      display: flex;
+      align-items: flex-start;
       margin-bottom: 40px;
 
-      .section-title {
-        color: #007bff;
-        font-size: 24px;
-        margin-bottom: 15px;
+      &:last-child {
+        margin-bottom: 0;
       }
 
-      .section-content {
-        color: #666;
-        font-size: 16px;
-        line-height: 1.6;
+      .icon-container {
+        margin-right: 20px;
+        font-size: 36px;
+        color: #007bff;
+      }
+
+      .text-container {
+        flex: 1;
+
+        .section-title {
+          color: #333;
+          font-size: 24px;
+          margin-bottom: 10px;
+          font-family: 'Roboto', sans-serif;
+          font-weight: 500;
+        }
+
+        .section-content {
+          color: #666;
+          font-size: 16px;
+          line-height: 1.8;
+        }
       }
     }
   }

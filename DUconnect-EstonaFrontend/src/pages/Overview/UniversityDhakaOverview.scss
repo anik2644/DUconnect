@@ -115,15 +115,12 @@
 
     .additional-info {
       margin-top: 40px;
-      display: flex;
-      justify-content: space-around;
 
       .info-section {
         background-color: #fff;
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 45%;
         text-align: center;
 
         h3 {
@@ -135,6 +132,23 @@
         p {
           font-size: 1em;
           color: #555;
+        }
+      }
+
+      .slick-slider {
+        margin: 0 auto;
+        width: 90%;
+
+        .slick-dots {
+          bottom: -30px;
+
+          li button:before {
+            color: #0056b3;
+          }
+
+          li.slick-active button:before {
+            color: #00274D;
+          }
         }
       }
     }

@@ -1,7 +1,20 @@
 import React from 'react';
+import Slider from 'react-slick';
 import './UniversityDhakaOverview.scss';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const UniversityDhakaOverview = () => {
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 600,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+  };
+
   return (
     <div className="university-dhaka">
       <nav className="navbar">
@@ -33,22 +46,23 @@ const UniversityDhakaOverview = () => {
             </p>
           </div>
           <div className="photos">
-            <img src="https://i.ibb.co/Ldd5cGL/cz.jpg" alt="University of Dhaka Photo 1" />
-            <img src="https://i.ibb.co/prvz6Yc/fdg.jpg" alt="University of Dhaka Photo 2" />
-            <img src="https://i.ibb.co/GJHqRQM/tsc.jpg" alt="University of Dhaka Photo 3" />
-            <img src="https://i.ibb.co/GJHqRQM/tsc.jpg" alt="University of Dhaka Photo 4" />
-
+            <img src="https://i.ibb.co/Ldd5cGL/cz.jpg" alt="University of Dhaka Main Building" />
+            <img src="https://i.ibb.co/WBTWVQT/16871043848757.jpg" alt="University of Dhaka Campus View" />
+            <img src="https://assets.telegraphindia.com/telegraph/2022/Apr/1651150294_marwadi-university2.jpg" alt="University of Dhaka TSC" />
+            <img src="https://i.ibb.co/rxhHZhQ/images.jpg" alt="University of Dhaka Another View" />
           </div>
         </div>
         <div className="additional-info">
-          <div className="info-section">
-            <h3>Current Students</h3>
-            <p>Learn about the resources and opportunities available to current students at the University of Dhaka.</p>
-          </div>
-          <div className="info-section">
-            <h3>Alumni</h3>
-            <p>Discover how our alumni are making an impact in various fields around the world.</p>
-          </div>
+          <Slider {...sliderSettings}>
+            <div className="info-section">
+              <h3>Current Students</h3>
+              <p>Learn about the resources and opportunities available to current students at the University of Dhaka.</p>
+            </div>
+            <div className="info-section">
+              <h3>Alumni</h3>
+              <p>Discover how our alumni are making an impact in various fields around the world.</p>
+            </div>
+          </Slider>
         </div>
       </div>
       <footer className="footer">
