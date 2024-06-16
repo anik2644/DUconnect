@@ -2,17 +2,17 @@
 
 .leftBar {
   @include themify($themes) {
-    flex: 1.5; /* Adjust the width of the left bar */
+    flex: 1.5;
     position: sticky;
     top: 0;
-    height: calc(100vh - 90px); /* Adjusted to fit the viewport height */
-    overflow-y: auto; /* Changed to auto for better scrolling behavior */
+    height: calc(100vh - 90px);
+    overflow-y: auto;
     background-color: #e2e2ed;
     color: #9a3535;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Add subtle text shadow for depth */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 
     @include mobile {
-      display: none; /* Hide the left bar on mobile devices */
+      display: none;
     }
 
     .container {
@@ -21,7 +21,7 @@
       hr {
         margin: 20px 0;
         border: none;
-        height: 1px; /* Increase the height of the separator */
+        height: 1px;
         background-color: themed("border");
       }
 
@@ -32,8 +32,8 @@
 
         span {
           font-size: 20px;
-          font-weight: bold; /* Make menu headings bold */
-          color: #555; /* Adjust color for menu headings */
+          font-weight: bold;
+          color: #555;
         }
 
         .user {
@@ -42,28 +42,28 @@
           gap: 10px;
 
           img {
-            width: 40px; /* Increase the size of the profile picture */
+            width: 40px;
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
           }
 
           span {
-            font-size: 18px; /* Decrease font size for username */
-            color: #333; /* Adjust color for username */
+            font-size: 18px;
+            color: #333;
           }
         }
 
         .item {
           display: flex;
           align-items: center;
-          gap: 20px; /* Adjust gap between icon and text */
-          padding: 10px 15px; /* Add padding to menu items */
-          border-radius: 5px; /* Add border radius to menu items for a rounded look */
+          gap: 20px;
+          padding: 10px 15px;
+          border-radius: 5px;
           transition: background-color 0.3s ease;
 
           &:hover {
-            background-color: #ddd; /* Change background color on hover */
+            background-color: #ddd;
           }
 
           img {
@@ -73,7 +73,20 @@
 
           span {
             font-size: 17px;
-            color: #615656; /* Adjust color for menu item text */
+            color: #615656;
+          }
+
+          &.logout-button {
+            background-color: red;
+            color: white;
+
+            &:hover {
+              background-color: darkred;
+            }
+
+            span {
+              color: white;
+            }
           }
         }
       }

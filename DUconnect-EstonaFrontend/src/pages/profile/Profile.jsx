@@ -1,20 +1,26 @@
-import React, { useState, useEffect } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCamera,
-  faEdit,
-  faSave,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
-import "./profile.scss";
+import React, { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera, faEdit, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
+import './profile.scss';
 
 const Profile = () => {
   const [image, setImage] = useState(null);
   const [profilePhoto, setProfilePhoto] = useState("");
-  const [profileData, setProfileData] = useState(null);
+  const [profileData, setProfileData] = useState({
+    userid: '2024-05-11 20:21:50.582',
+    username: 'anik',
+    name: 'MHD Mahmud Anik',
+    email: 'anik11556@gmail.com',
+    department: 'CSE',
+    registrationNo: '2019317827',
+    session: '19/20',
+    hall: 'SH',
+    password: '*******'
+  });
   const [editMode, setEditMode] = useState({});
   const [updateMessage, setUpdateMessage] = useState("");
-  const [profileid, setProfileId] = useState("anik11556@gmail.com");
+
+  const [profileid, setProfileId] = useState("nafisa37@gmail.com");
   const [img_path, setImagepath] = useState("");
 
   useEffect(() => {
@@ -25,11 +31,10 @@ const Profile = () => {
     console.log(profileid);
 
     fetch(`http://localhost:8888/profile?email=${profileid}`, {
-      method: "GET", // Change method to GET
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      // body: JSON.stringify(profileid)
     })
       .then((response) => {
         if (!response.ok) {
@@ -38,32 +43,14 @@ const Profile = () => {
         return response.json();
       })
       .then((data) => {
-        console.log("getting data:", data); // Print data to console
-        // Delete the 'profile_photo' field from the data
+        console.log("getting data:", data);
         const { profile_photo, ...profileDataWithoutPhoto } = data;
-
-        // Set profile data without profile_photo
         setProfileData(profileDataWithoutPhoto);
-
-        // Set profile photo separately
         console.log("getting profile data:", profile_photo);
         setProfilePhoto(profile_photo);
       })
       .catch((error) => console.error("Error fetching profile data:", error));
   };
-  // const fetchProfileData = () => {
-  //   fetch('http://localhost:8888/profile',
-  //      {
-  //     method: "GET", // Change method to GET
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-
-  // })
-  //     .then(response => response.json())
-  //     .then(data => setProfileData(data))
-  //     .catch(error => console.error('Error fetching profile data:', error));
-  // };
 
   const handleImageUpload = (event) => {
     const file = event.target.files[0];
@@ -83,23 +70,21 @@ const Profile = () => {
   };
 
   const toggleEditMode = (key) => {
-    setEditMode((prevState) => ({
+    setEditMode(prevState => ({
       ...prevState,
       [key]: !prevState[key],
     }));
   };
 
   const handleValueChange = (key, newValue) => {
-    setProfileData((prevData) => ({
+    setProfileData(prevData => ({
       ...prevData,
       [key]: newValue,
     }));
   };
 
   const saveChanges = () => {
-    // Here you can implement logic to save changes to the server
     console.log("Saving changes:", profileData);
-    // After saving changes, fetch profile data again
     fetchProfileData();
     setUpdateMessage("Updation Successful");
   };
@@ -115,7 +100,6 @@ const Profile = () => {
       session: profileData.session,
       hall: profileData.hall,
       password: profileData.password,
-      // profile_photo: img_path,
     };
     if (img_path !== "") {
       profileDatabackend.profile_photo = img_path;
@@ -135,7 +119,6 @@ const Profile = () => {
       .then((data) => {
         console.log("Profile updated successfully:", data);
         setUpdateMessage("Updation Successful");
-        // Reset the update message after 1 second
         setTimeout(() => {
           setUpdateMessage("");
         }, 1000);
@@ -143,7 +126,6 @@ const Profile = () => {
       .catch((error) => {
         console.error("Error updating profile:", error);
         setUpdateMessage("Updation Failed");
-        // Reset the update message after 1 second
         setTimeout(() => {
           setUpdateMessage("");
         }, 1000);
@@ -152,81 +134,66 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
-      <div className="profile-image-container">
-        {image ? (
-          <img src={image} alt="Profile" className="profile-image" />
-        ) : profilePhoto !== "" ? (
-          <img src={profilePhoto} alt="Profile" className="profile-image" />
-        ) : (
-          <div className="camera-icon">
-            <FontAwesomeIcon
-              icon={faCamera}
-              style={{ fontSize: "40px", color: "#555" }}
-            />
-          </div>
-        )}
+      <div className="profile-header">
+        <div className="profile-image-container">
+          {image ? (
+            <img src={image} alt="Profile" className="profile-image" />
+          ) : profilePhoto !== "" ? (
+            <img src={profilePhoto} alt="Profile" className="profile-image" />
+          ) : (
+            <div className="camera-icon">
+              <FontAwesomeIcon icon={faCamera} style={{ fontSize: "40px", color: "#555" }} />
+            </div>
+          )}
+        </div>
+        
+        <div className="buttons-container">
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageUpload}
+            className="upload-input"
+          />
+          <button onClick={updateProfileOnServer} className="edit-button">
+            Confirm Changes
+          </button>
+        </div>
+        
+        <h1>{profileData.name}</h1>
       </div>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageUpload}
-        className="upload-input"
-      />
-      <table className="profile-table">
-        <tbody>
-          {Object.entries(profileData || {}).map(([key, value]) => (
-            <tr key={key}>
-              <td>{key.replace("_", " ")}</td>
-              <td>
-                {key === "password" ? (
-                  editMode[key] ? (
+      <div className="profile-info">
+        <table className="profile-table">
+          <tbody>
+            {Object.entries(profileData).map(([key, value]) => (
+              <tr key={key}>
+                <td className="profile-key">{key.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}</td>
+                <td className="profile-value">
+                  {editMode[key] ? (
                     <input
-                      type="password"
-                      value={profileData[key]}
+                      type="text"
+                      value={value}
                       onChange={(e) => handleValueChange(key, e.target.value)}
                     />
                   ) : (
-                    "••••••••"
-                  )
-                ) : editMode[key] ? (
-                  <input
-                    type="text"
-                    value={profileData[key]}
-                    onChange={(e) => handleValueChange(key, e.target.value)}
-                  />
-                ) : (
-                  profileData[key]
-                )}
-              </td>
-              <td>
-                {editMode[key] ? (
-                  <>
-                    <FontAwesomeIcon
-                      icon={faSave}
-                      onClick={() => saveChanges()}
-                      className="edit-icons"
-                    />
-                    <FontAwesomeIcon
-                      icon={faTimes}
-                      onClick={() => toggleEditMode(key)}
-                      className="edit-icons"
-                    />
-                  </>
-                ) : (
-                  <FontAwesomeIcon
-                    icon={faEdit}
-                    onClick={() => toggleEditMode(key)}
-                    className="edit-icons"
-                  />
-                )}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="edit-button">
-        <button onClick={updateProfileOnServer}> Edit Profile </button>
+                    value
+                  )}
+                </td>
+                <td className="profile-actions">
+                  {editMode[key] ? (
+                    <>
+                      <FontAwesomeIcon icon={faSave} onClick={saveChanges} />
+                      <FontAwesomeIcon icon={faTimes} onClick={() => toggleEditMode(key)} />
+                    </>
+                  ) : (
+                    <FontAwesomeIcon icon={faEdit} onClick={() => toggleEditMode(key)} />
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+
       {updateMessage && <p className="update-message">{updateMessage}</p>}
     </div>
   );

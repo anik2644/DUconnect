@@ -13,6 +13,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
+
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import "./style.scss";
@@ -40,36 +41,51 @@ import BloodList from './pages/Blood/BloodList';
 
 
 
-
 function App() {
   const { currentUser } = useContext(AuthContext);
-
   const { darkMode } = useContext(DarkModeContext);
+
 
   const Layout = () => {
     return (
-     <div className={`theme-${darkMode ? "dark" : "light"}`}>
-    <Navbar />
-    <div style={{ display: "flex" }}>
-
-        <LeftBar />
-        <div style={{ flex: 6 }}>
+      <div className={`theme-${darkMode ? "dark" : "light"}`}>
+        <Navbar />
+        <div style={{ display: "flex" }}>
+          <LeftBar />
+          <div style={{ flex: 6 }}>
             <Outlet />
+          </div>
         </div>
-
-    </div>
-</div>
-
+      </div>
     );
   };
+
+
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
-      return <Navigate to="/login." />;
+      return <Navigate to="/login" />;
     }
     return children;
   };
 
+
   const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Navigate to="/overview" replace />,
+    },
+    {
+      path: "/overview",
+      element: <UniversityDhakaOverview />,
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/register",
+      element: <Register />,
+    },
     {
       path: "/",
       element: (
@@ -79,11 +95,11 @@ function App() {
       ),
       children: [
         {
-          path: "/",
+          path: "/home",
           element: <Home />,
         },
         {
-          path: "/profile/",
+          path: "/profile",
           element: <Profile />,
         },
         {
@@ -110,64 +126,58 @@ function App() {
           path: "/event",
           element: <Event />,
         },
-
       ],
-    },
-    {
-      path: "/login",
-      element: <Login />,
-    },
-    {
-
-    },
-    {
-      path: "/register",
-      element: <Register />,
     },
     {
       path: "/readmore",
       element: <Articledetail />,
     },
     {
-
-
       path: "/editprofile",
       element: <EditProfilePage />,
     },
     {
       path: "/anik",
-      element: <Anik/>,
+      element: <Anik />,
     },
     {
       path: "/forgetpassword",
-      element: <ForgetPasswordPage/>,
+      element: <ForgetPasswordPage />,
     },
     {
       path: "/resetpassword",
-      element: <ResetPasswordPage/>,
+      element: <ResetPasswordPage />,
     },
     {
       path: "/blood-list",
       element: <BloodList/>,
     },
-    
-  
-    {
-      path: "/overview",
-      element: <UniversityDhakaOverview/>,
-    },
-    {
+     {
       path: "/eventdetail",
       element: <EventDetail/>,
     },
+
+
+
+
+
+
+
+
   ]);
+
 
   return (
     <div>
       <RouterProvider router={router} />
     </div>
-
   );
 }
 
+
 export default App;
+
+
+
+
+

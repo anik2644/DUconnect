@@ -13,7 +13,7 @@ const LeftBar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
   const [profilePhoto, setProfilePhoto] = useState("");
   const [userName, setuserName] = useState("");
-  const [profileid, setProfileId] = useState("anik11556@gmail.com");
+  const [profileid, setProfileId] = useState("nafisa37@gmail.com");
 
   useEffect(() => {
     fetchProfileData();
@@ -63,7 +63,7 @@ const LeftBar = () => {
             <span>{userName}</span>
           </div>
           {/* Link to Home page */}
-          <Link to="/" className="item">
+          <Link to="/home" className="item">
             <FontAwesomeIcon icon={faHome} />
             <span>Home</span>
           </Link>
@@ -73,10 +73,7 @@ const LeftBar = () => {
             <span>Notifications</span>
           </Link>
           {/* Link to Settings page */}
-          <Link to="/settings" className="item">
-            <FontAwesomeIcon icon={faCog} />
-            <span>Settings</span>
-          </Link>
+
           {/* Link to My Profile page */}
           <Link to="/profile" className="item">
             <FontAwesomeIcon icon={faUser} />
@@ -87,7 +84,15 @@ const LeftBar = () => {
             <FontAwesomeIcon icon={faScroll} />
             <span>Terms and Conditions</span>
           </Link>
+
+
+          <Link to="/settings" className="item logout-button">
+            <FontAwesomeIcon icon={faCog} />
+            <span>Logout</span>
+          </Link>
         </div>
+
+
         <hr />
         <div className="menu">
           <span>Your shortcuts</span>

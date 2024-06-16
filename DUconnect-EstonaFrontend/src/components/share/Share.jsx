@@ -12,7 +12,7 @@ const Share = (props) => {
   const [img_path, setImagepath]= useState("")
   const [profilePhoto, setProfilePhoto] = useState("");
   const [userName, setuserName] = useState("");
-  const [profileid, setProfileId] = useState("anik11556@gmail.com");
+  const [profileid, setProfileId] = useState("nafisa37@gmail.com");
 
   useEffect(() => {
     fetchProfileData();

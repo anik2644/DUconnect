@@ -1,82 +1,81 @@
 .settings-page {
-  max-width: 600px;
-  margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: 20px auto; /* Add margin-top to move the card down */
+  text-align: center;
 
   .settings-title {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #333;
-  }
-
-  .settings-section {
-    margin-bottom: 20px;
-
-    .section-title {
-      font-size: 20px;
-      margin-bottom: 10px;
-      color: #555;
-    }
-
-    .setting-item {
-      margin-bottom: 10px;
-      label {
-        font-weight: bold;
-        margin-right: 10px;
-      }
-      input[type='email'],
-      input[type='password'],
-      select {
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        width: 100%;
-        box-sizing: border-box;
-      }
-    }
   }
 
   .logout-section {
-    button {
-      background-color: #ff6347; /* Red color for the button */
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+    margin-top: 20px;
+  }
 
-      &:hover {
-        background-color: #ff4838; /* Darker red color on hover */
-      }
+  .logout-section button {
+    background-color: red;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+      background-color: darkred;
+    }
+  }
+
+  .confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    p {
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
     }
 
-    .confirm-logout {
+    .confirmation-buttons {
+      display: flex;
+      justify-content: space-around;
       margin-top: 10px;
 
       button {
-        background-color: #5cb85c; /* Green color for the button */
-        color: white;
-        padding: 15px 25px;
+        padding: 10px 20px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
-        margin-right: 10px;
-        padding-bottom: 9px;
+        font-size: 16px;
+      }
+
+      button:first-child {
+        background-color: red;
+        color: white;
 
         &:hover {
-          background-color: #4cae4c; /* Darker green color on hover */
+          background-color: darkred;
         }
       }
 
-      button.cancel {
-        background-color: #d9534f; /* Red color for the cancel button */
+      button:last-child {
+        background-color: grey;
+        color: white;
+
         &:hover {
-          background-color: #c9302c; /* Darker red color on hover */
-          padding: 20px;
+          background-color: darkgrey;
         }
       }
     }

@@ -26,7 +26,7 @@ const Login = () => {
       
       if (response.ok) {
         // Redirect to Home page if login is successful
-        window.location.href = "/"; // Redirect manually since useNavigate doesn't work outside of React Router
+        window.location.href = "/home"; // Redirect manually since useNavigate doesn't work outside of React Router
       } else {
         const data = await response.json();
         setError(data.detail);

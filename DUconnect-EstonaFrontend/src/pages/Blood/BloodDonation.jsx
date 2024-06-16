@@ -64,7 +64,7 @@ const BloodDonation = () => {
     } catch (error) {
       setMessage("Error");
     }
-    setTimeout(() => setMessage(""), 1000); // Clea
+    setTimeout(() => setMessage(""), 1000);
 
     console.log("Form submitted:", {
       name,
@@ -80,16 +80,11 @@ const BloodDonation = () => {
 
   return (
     <div className="blood-donation-page">
-
-      {/* Logo on the left */}
-
-      {/* Form on the right */}
       <div className="donation-form">
-
-      <Link to="/blood-list" className="Create-Event">
-        <button className="blood-list-button">Blood Requsition List</button>
-      </Link>
-        <h2>Medical Blood Donation Consent Form</h2>
+        <Link to="/blood-list" className="Create-Event">
+          <button className="blood-list-button">Blood Requisition List</button>
+        </Link>
+        <h2>Blood Donation Consent Form</h2>
         <img
           src="https://i.ibb.co/0Kcyhph/blood-donation.jpg"
           alt="Blood Donation Logo"
@@ -98,7 +93,7 @@ const BloodDonation = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label>
-              Name:
+              Name
               <div className="name-inputs">
                 <input
                   type="text"
@@ -120,7 +115,7 @@ const BloodDonation = () => {
             </label>
           </div>
           <label>
-            Date of Birth:
+            Date of Birth
             <input
               type="date"
               value={dateOfBirth}
@@ -129,7 +124,7 @@ const BloodDonation = () => {
             />
           </label>
           <label>
-            Address:
+            Address
             <input
               type="text"
               value={address}
@@ -138,7 +133,7 @@ const BloodDonation = () => {
             />
           </label>
           <label>
-            Registration Number:
+            Registration Number
             <input
               type="text"
               value={registrationNumber}
@@ -147,7 +142,7 @@ const BloodDonation = () => {
             />
           </label>
           <label>
-            Blood Group:
+            Blood Group
             <select
               value={bloodGroup}
               onChange={(e) => setBloodGroup(e.target.value)}
@@ -165,7 +160,7 @@ const BloodDonation = () => {
             </select>
           </label>
           <label>
-            Department:
+            Department
             <select
               value={department}
               onChange={(e) => setDepartment(e.target.value)}
@@ -181,7 +176,7 @@ const BloodDonation = () => {
             </select>
           </label>
           <label>
-            Session:
+            Session
             <select
               value={session}
               onChange={(e) => setSession(e.target.value)}
@@ -195,7 +190,7 @@ const BloodDonation = () => {
             </select>
           </label>
           <label>
-            Area:
+            Area
             <select
               value={area}
               onChange={(e) => setArea(e.target.value)}
