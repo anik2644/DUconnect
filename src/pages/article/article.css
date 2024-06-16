@@ -1,0 +1,145 @@
+.article-page {
+    padding: 20px;
+}
+
+.article-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.article-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #932929;
+    margin: 0;
+}
+
+.add-article-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-article-btn:hover {
+    background-color: #0056b3;
+}
+
+.article-main {
+    display: flex;
+    justify-content: center;
+}
+
+.article-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 90px;
+}
+
+.article-item {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.article-image {
+    width: 100%;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 2px solid #ddd;
+}
+
+.article-content {
+    padding: 15px;
+    background-color: #fff;
+}
+
+.article-content h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.article-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.read-more-link {
+    color: #047cfc;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.delete-article-btn {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-article-btn:hover {
+    background-color: #d13e28;
+}
+
+.add-article-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    width: 400px;
+    max-width: 90%;
+}
+
+.add-article-modal .modal-content {
+    position: relative;
+}
+
+.add-article-modal .close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.add-article-modal input[type="text"],
+.add-article-modal textarea {
+    width: calc(100% - 20px);
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.add-article-modal input[type="submit"] {
+    background-color: #047cfc;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add-article-modal input[type="submit"]:hover {
+    background-color: #0056b3;
+}
