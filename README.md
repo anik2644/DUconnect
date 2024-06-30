@@ -13,7 +13,7 @@ DUCONNECT is a web-based social media application targeting the university commu
 
 ## Demo Video
 
-Watch our demo video to see DUCONNECT in action: [DUCONNECT Demo](https://www.youtube.com/watch?v=your_demo_video_link](https://www.youtube.com/watch?v=E8HLfvO5q90&list=LL&index=5))
+Watch our demo video to see DUCONNECT in action: [Demo Video ](https://www.youtube.com/watch?v=E8HLfvO5q90&list=LL&index=6))
 
 ## Features
 
